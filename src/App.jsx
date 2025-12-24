@@ -21,8 +21,10 @@ const CarSaleContractGenerator = lazy(() =>
 );
 const NotFound = lazy(() => import("./components/NotFound"));
 
-const lazyLoad = (component) => (
-  <Suspense fallback={<SpinnerLoading />}>{component}</Suspense>
+const lazyLoad = (key, component) => (
+  <Suspense key={key} fallback={<SpinnerLoading />}>
+    {component}
+  </Suspense>
 );
 
 const router = createBrowserRouter([
@@ -32,25 +34,34 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: lazyLoad(<Home />),
+        element: lazyLoad("home", <Home />),
       },
-      { path: "calculator", element: lazyLoad(<Calculator />) },
-      { path: "timer", element: lazyLoad(<Timer />) },
+      { path: "calculator", element: lazyLoad("calculator", <Calculator />) },
+      { path: "timer", element: lazyLoad("timer", <Timer />) },
       {
         path: "number_random_generator",
-        element: lazyLoad(<RandomNumberGenerator />),
+        element: lazyLoad("number_random_generator", <RandomNumberGenerator />),
       },
-      { path: "password_generator", element: lazyLoad(<PasswordGenerator />) },
-      { path: "credit_calculator", element: lazyLoad(<CreditCalculator />) },
+      {
+        path: "password_generator",
+        element: lazyLoad("password_generator", <PasswordGenerator />),
+      },
+      {
+        path: "credit_calculator",
+        element: lazyLoad("credit_calculator", <CreditCalculator />),
+      },
       {
         path: "investment_calculator",
-        element: lazyLoad(<InvestmentCalculator />),
+        element: lazyLoad("investment_calculator", <InvestmentCalculator />),
       },
-      { path: "trader_calculator", element: lazyLoad(<TraderCalculator />) },
-      { path: "calendar", element: lazyLoad(<Calendar />) },
-      { path: "calendar/:year", element: lazyLoad(<Calendar />) },
-      { path: "dkp", element: lazyLoad(<CarSaleContractGenerator />) },
-      { path: "*", element: lazyLoad(<NotFound />) },
+      {
+        path: "trader_calculator",
+        element: lazyLoad("trader_calculator", <TraderCalculator />),
+      },
+      { path: "calendar", element: lazyLoad("calendar", <Calendar />) },
+      { path: "calendar/:year", element: lazyLoad("calendar", <Calendar />) },
+      { path: "dkp", element: lazyLoad("dkp", <CarSaleContractGenerator />) },
+      { path: "*", element: lazyLoad("*", <NotFound />) },
     ],
   },
 ]);
