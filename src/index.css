@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+.active {
+  @apply bg-gray-700;
+  @apply pl-6;
+  @apply transition-all;
+}
+body {
+  @apply bg-blue-50;
+}
