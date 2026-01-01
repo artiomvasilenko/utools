@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
 const Calendar = () => {
+  const currentYear = new Date().getFullYear().toString();
   const { year } = useParams();
-  const [selectedYear, setSelectedYear] = useState(year || "2025");
+  const [selectedYear, setSelectedYear] = useState(year || currentYear);
   const [calendarData, setCalendarData] = useState({});
   const [statistics, setStatistics] = useState({});
 
@@ -131,7 +132,6 @@ const Calendar = () => {
         // Проверяем сегодня
         if (date.getTime() === today.getTime()) {
           isToday = true;
-          console.log("Today is work");
         }
 
         // Считаем рабочие дни и часы
