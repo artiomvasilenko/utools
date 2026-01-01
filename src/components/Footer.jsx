@@ -8,8 +8,8 @@ export default function Footer() {
           <span className="text-gray-300"> artiomvasilenko@yandex.ru</span>
         </p>
         <p className="font-bold">
-          © {new Date().getFullYear()} Полезные инструменты UTOOLS онлайн. Все
-          права защищены.
+          © {new Date().getFullYear()} Полезные инструменты USE-TOOLS онлайн.
+          Все права защищены.
         </p>
       </div>
     </footer>
