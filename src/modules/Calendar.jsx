@@ -415,7 +415,7 @@ const Calendar = () => {
                 />
               </svg>
             </summary>
-            <div className="overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-open:max-h-[2000px]">
+            <div className="overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-open:max-h-500">
               <div className="p-4 pt-6">
                 <div className="text-gray-800 text-sm mt-16">
                   {" "}
