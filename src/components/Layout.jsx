@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import { Suspense } from "react";
 import SpinnerLoading from "./SpinnerLoading";
 import YandexAds from "./YandexAds";
+import CookiesModal from "./CookiesModal";
 
 export default function Layout() {
   const location = useLocation();
@@ -19,6 +20,7 @@ export default function Layout() {
           </Suspense>
         </main>
       </main>
+      <CookiesModal />
       <YandexAds />
       <Footer />
     </>

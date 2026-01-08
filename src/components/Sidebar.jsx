@@ -9,20 +9,26 @@ export default function Sidebar() {
       <nav>
         <ul className="space-y-2 pl-5">
           <li>
-            <NavLink to="/" className="block p-2 hover:bg-gray-700">
+            <NavLink
+              to="/"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
               🛠️ Главная
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/timer" className="block p-2 hover:bg-gray-700">
+            <NavLink
+              to="/timer"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
               ⏱️ Таймер
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/number_random_generator"
-              className="block p-2 hover:bg-gray-700"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
               🔢 Случайное число
             </NavLink>
@@ -30,20 +36,23 @@ export default function Sidebar() {
           <li>
             <NavLink
               to="/password_generator"
-              className="block p-2 hover:bg-gray-700"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
               📝 Генератор паролей
             </NavLink>
           </li>
           <li>
-            <NavLink to="/calculator" className="block p-2 hover:bg-gray-700">
+            <NavLink
+              to="/calculator"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
               🧮 Калькулятор
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/credit_calculator"
-              className="block p-2 hover:bg-gray-700"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
               🧮 Кредитный калькулятор
             </NavLink>
@@ -51,7 +60,7 @@ export default function Sidebar() {
           <li>
             <NavLink
               to="/investment_calculator"
-              className="block p-2 hover:bg-gray-700"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
               🧮 Калькулятор инвестора
             </NavLink>
@@ -59,18 +68,24 @@ export default function Sidebar() {
           <li>
             <NavLink
               to="/trader_calculator"
-              className="block p-2 hover:bg-gray-700"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
               🧮 Калькулятор трейдера
             </NavLink>
           </li>
           <li>
-            <NavLink to="/calendar" className="block p-2 hover:bg-gray-700">
+            <NavLink
+              to="/calendar"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
               🗓️ Производственный календарь
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dkp" className="block p-2 hover:bg-gray-700">
+            <NavLink
+              to="/dkp"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
               📄 Договор купли-продажи автомобиля
             </NavLink>
           </li>
