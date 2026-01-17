@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import timermp3 from "../assets/timer.mp3";
+import Description_component from "../components/Description_component";
 
 // Функция воспроизведения звука
 
@@ -216,8 +217,8 @@ const Timer = () => {
                         setCustomMinutes(
                           Math.min(
                             240,
-                            Math.max(0, parseInt(e.target.value) || 0)
-                          )
+                            Math.max(0, parseInt(e.target.value) || 0),
+                          ),
                         )
                       }
                       className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg px-3 py-2 text-white text-center focus:outline-none focus:border-cyan-400"
@@ -236,8 +237,8 @@ const Timer = () => {
                         setCustomSeconds(
                           Math.min(
                             59,
-                            Math.max(0, parseInt(e.target.value) || 0)
-                          )
+                            Math.max(0, parseInt(e.target.value) || 0),
+                          ),
                         )
                       }
                       className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg px-3 py-2 text-white text-center focus:outline-none focus:border-cyan-400"
@@ -298,8 +299,8 @@ const Timer = () => {
                   isActive
                     ? "bg-linear-to-r from-rose-500 to-pink-600 text-white shadow-lg shadow-rose-500/30"
                     : time === 0
-                    ? "bg-linear-to-r from-slate-700 to-slate-800 text-white"
-                    : "bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg shadow-cyan-500/30"
+                      ? "bg-linear-to-r from-slate-700 to-slate-800 text-white"
+                      : "bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg shadow-cyan-500/30"
                 } ${time === 0 ? "cursor-not-allowed" : ""}`}
               >
                 {isActive ? "Пауза" : time === 0 ? "Завершено" : "Старт"}
@@ -323,16 +324,16 @@ const Timer = () => {
                   isActive
                     ? "bg-emerald-400 animate-pulse"
                     : isComplete
-                    ? "bg-emerald-400"
-                    : "bg-cyan-400"
+                      ? "bg-emerald-400"
+                      : "bg-cyan-400"
                 }`}
               ></div>
               <span className="text-slate-400 text-sm">
                 {isComplete
                   ? "Таймер завершен"
                   : isActive
-                  ? "Таймер активен"
-                  : "Таймер на паузе"}
+                    ? "Таймер активен"
+                    : "Таймер на паузе"}
               </span>
             </div>
           </div>
@@ -354,205 +355,163 @@ const Timer = () => {
           </p>
         </div>
       </div>
+      <Description_component>
+        <p className="font-bold mt-6 text-center">
+          ⏱️ Онлайн Таймер Обратного Отсчета | Бесплатный Таймер для Кухни,
+          Тренировок и Работы
+        </p>
 
-      {/* SEO-описание инструмента */}
-      <div className="text-gray-800 text-sm mt-16">
-        <details className="group">
-          <summary className="flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors duration-200 list-none">
-            <span className="font-medium text-gray-700 group-open:hidden">
-              Описание
+        <p className="mt-6">
+          <strong>Онлайн таймер обратного отсчета</strong> — это незаменимый
+          инструмент для управления временем, который помогает контролировать
+          длительность любых процессов. Наш{" "}
+          <strong>бесплатный таймер онлайн</strong> предлагает удобный интерфейс
+          и множество полезных функций для личного и профессионального
+          использования.
+        </p>
+
+        <p className="mt-6 font-bold">Основные возможности онлайн таймера:</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+          <li className="flex items-start">
+            <span className="mr-2">✓</span>
+            <span>
+              <strong>Таймер для кухни</strong> — идеален для приготовления
+              пищи, выпечки и соблюдения рецептов
             </span>
-            <span className="font-medium text-gray-700 hidden group-open:inline">
-              Скрыть
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Таймер для тренировок</strong> — контроль интервалов,
+              подходов и отдыха в спортивных занятиях
             </span>
-            <svg
-              className="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </summary>
-          <div className="overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-open:max-h-[2000px]">
-            <div className="p-4 pt-6">
-              <div className="text-gray-800 text-sm mt-16">
-                <p className="font-bold mt-6 text-center">
-                  ⏱️ Онлайн Таймер Обратного Отсчета | Бесплатный Таймер для
-                  Кухни, Тренировок и Работы
-                </p>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Таймер для работы</strong> — организация рабочего времени
+              по методу Помодоро
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>Мгновенная генерация чисел без перезагрузки страницы</span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Обратный отсчет</strong> с точностью до секунды для любых
+              задач
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Таймер с звуковым сигналом</strong> — громкое оповещение
+              об окончании времени
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Таймер на компьютере</strong> — работает прямо в браузере
+              без установки программ
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Таймер для учебы</strong> — планирование времени на
+              выполнение заданий и перерывы
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Таймер для игр</strong> — контроль времени в настольных и
+              спортивных играх
+            </span>
+          </li>
+        </ul>
 
-                <p className="mt-6">
-                  <strong>Онлайн таймер обратного отсчета</strong> — это
-                  незаменимый инструмент для управления временем, который
-                  помогает контролировать длительность любых процессов. Наш{" "}
-                  <strong>бесплатный таймер онлайн</strong> предлагает удобный
-                  интерфейс и множество полезных функций для личного и
-                  профессионального использования.
-                </p>
+        <p className="mt-6 font-bold">Почему выбирают наш онлайн таймер:</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+          <li className="flex items-start">
+            <span className="mr-2">✓</span>
+            <span>
+              <strong>Удобный интерфейс.</strong> Интуитивно понятное
+              управление, крупные цифры, настраиваемые цвета и темы
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Быстрая настройка.</strong> Предустановки для популярных
+              задач (5, 10, 15, 25, 30, 60 минут)
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Кроссплатформенность.</strong> Работает на всех
+              устройствах: компьютеры, планшеты, смартфоны
+            </span>
+          </li>
+        </ul>
+        <p className="mt-6 font-bold">Практическое применение таймера:</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+          <li className="flex items-start">
+            <span className="mr-2">✓</span>
+            <span>
+              <strong>Кулинария.</strong> Приготовление пищи, выпечка, варка яиц
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Бизнес. </strong> Презентации, встречи, дедлайны
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Фитнес.</strong> Интервальные тренировки, HIIT, отдых
+            </span>
+          </li>
+          <li className="flex items-start">
+            <span className=" mr-2">✓</span>
+            <span>
+              <strong>Образование.</strong> Экзамены, тесты, домашние задания
+            </span>
+          </li>
+        </ul>
 
-                <p className="mt-6 font-bold">
-                  Основные возможности онлайн таймера:
-                </p>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-                  <li className="flex items-start">
-                    <span className="mr-2">✓</span>
-                    <span>
-                      <strong>Таймер для кухни</strong> — идеален для
-                      приготовления пищи, выпечки и соблюдения рецептов
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Таймер для тренировок</strong> — контроль
-                      интервалов, подходов и отдыха в спортивных занятиях
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Таймер для работы</strong> — организация рабочего
-                      времени по методу Помодоро
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      Мгновенная генерация чисел без перезагрузки страницы
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Обратный отсчет</strong> с точностью до секунды
-                      для любых задач
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Таймер с звуковым сигналом</strong> — громкое
-                      оповещение об окончании времени
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Таймер на компьютере</strong> — работает прямо в
-                      браузере без установки программ
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Таймер для учебы</strong> — планирование времени
-                      на выполнение заданий и перерывы
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Таймер для игр</strong> — контроль времени в
-                      настольных и спортивных играх
-                    </span>
-                  </li>
-                </ul>
+        <p className="mt-4">
+          Наш <strong>таймер онлайн с обратным отсчетом</strong> использует
+          точные алгоритмы JavaScript для измерения времени. Вы можете
+          установить <strong>таймер на 5 минут</strong>,{" "}
+          <strong>таймер на 10 минут</strong>,{" "}
+          <strong>таймер на 15 минут</strong> или любое другое значение до 24
+          часов. После окончания отсчета срабатывает{" "}
+          <strong>звуковой сигнал таймера</strong>, который можно настроить по
+          громкости и мелодии.
+        </p>
 
-                <p className="mt-6 font-bold">
-                  Почему выбирают наш онлайн таймер:
-                </p>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-                  <li className="flex items-start">
-                    <span className="mr-2">✓</span>
-                    <span>
-                      <strong>Удобный интерфейс.</strong> Интуитивно понятное
-                      управление, крупные цифры, настраиваемые цвета и темы
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Быстрая настройка.</strong> Предустановки для
-                      популярных задач (5, 10, 15, 25, 30, 60 минут)
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Кроссплатформенность.</strong> Работает на всех
-                      устройствах: компьютеры, планшеты, смартфоны
-                    </span>
-                  </li>
-                </ul>
-                <p className="mt-6 font-bold">
-                  Практическое применение таймера:
-                </p>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-                  <li className="flex items-start">
-                    <span className="mr-2">✓</span>
-                    <span>
-                      <strong>Кулинария.</strong> Приготовление пищи, выпечка,
-                      варка яиц
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Бизнес. </strong> Презентации, встречи, дедлайны
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Фитнес.</strong> Интервальные тренировки, HIIT,
-                      отдых
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className=" mr-2">✓</span>
-                    <span>
-                      <strong>Образование.</strong> Экзамены, тесты, домашние
-                      задания
-                    </span>
-                  </li>
-                </ul>
+        <p className="mt-6">
+          <strong>Онлайн таймер обратного отсчета</strong> — это ваш надежный
+          помощник в управлении временем! Попробуйте наш{" "}
+          <strong>таймер для компьютера</strong> прямо сейчас — это лучший
+          способ повысить продуктивность, соблюдать сроки и эффективно
+          планировать свой день. <strong>Простой таймер</strong> с мощным
+          функционалом!
+        </p>
 
-                <p className="mt-4">
-                  Наш <strong>таймер онлайн с обратным отсчетом</strong>{" "}
-                  использует точные алгоритмы JavaScript для измерения времени.
-                  Вы можете установить <strong>таймер на 5 минут</strong>,{" "}
-                  <strong>таймер на 10 минут</strong>,{" "}
-                  <strong>таймер на 15 минут</strong> или любое другое значение
-                  до 24 часов. После окончания отсчета срабатывает{" "}
-                  <strong>звуковой сигнал таймера</strong>, который можно
-                  настроить по громкости и мелодии.
-                </p>
-
-                <p className="mt-6">
-                  <strong>Онлайн таймер обратного отсчета</strong> — это ваш
-                  надежный помощник в управлении временем! Попробуйте наш{" "}
-                  <strong>таймер для компьютера</strong> прямо сейчас — это
-                  лучший способ повысить продуктивность, соблюдать сроки и
-                  эффективно планировать свой день.{" "}
-                  <strong>Простой таймер</strong> с мощным функционалом!
-                </p>
-
-                <p className="mt-6">
-                  Популярные запросы: таймер онлайн, таймер обратного отсчета,
-                  таймер на 5 минут, таймер для кухни, таймер для тренировок,
-                  таймер с будильником, бесплатный таймер, таймер помодоро
-                </p>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
+        <p className="mt-6">
+          Популярные запросы: таймер онлайн, таймер обратного отсчета, таймер на
+          5 минут, таймер для кухни, таймер для тренировок, таймер с
+          будильником, бесплатный таймер, таймер помодоро
+        </p>
+      </Description_component>
     </>
   );
 };

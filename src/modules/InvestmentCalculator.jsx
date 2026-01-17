@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Description_component from "../components/Description_component";
 
 const InvestmentCalculator = () => {
   // Состояния для параметров инвестирования
@@ -8,7 +9,7 @@ const InvestmentCalculator = () => {
   const [interestRate, setInterestRate] = useState(10);
   const [reinvestmentPeriod, setReinvestmentPeriod] = useState("monthly"); // monthly или yearly
   const [additionalContributions, setAdditionalContributions] = useState(10000);
-  const [contributionFrequency, setContributionFrequency] = useState("yearly"); // monthly или yearly
+  const [contributionFrequency, setContributionFrequency] = useState("monthly"); // monthly или yearly
   const [finalAmount, setFinalAmount] = useState(0);
   const [totalInvested, setTotalInvested] = useState(0);
   const [totalProfit, setTotalProfit] = useState(0);
@@ -26,46 +27,40 @@ const InvestmentCalculator = () => {
 
   // Обработчики изменений
   const handleInitialCapitalChange = (e) => {
-    const value = Math.min(
-      1000000000,
-      Math.max(0, parseInt(e.target.value) || 0)
-    );
-    setInitialCapital(value);
+    const value = Math.min(1000000000, Math.max(0, parseInt(e.target.value)));
+    if (isNaN(value)) {
+      setInitialCapital("");
+    } else {
+      setInitialCapital(value);
+    }
   };
 
   const handleInvestmentTermChange = (e) => {
     const maxTerm = termType === "months" ? 360 : 30;
-    const value = Math.min(maxTerm, Math.max(0, parseInt(e.target.value) || 0));
-    setInvestmentTerm(value);
+    const value = Math.min(maxTerm, Math.max(0, parseInt(e.target.value)));
+    if (isNaN(value)) {
+      setInvestmentTerm("");
+    } else {
+      setInvestmentTerm(value);
+    }
   };
 
   const handleInterestRateChange = (e) => {
-    const value = Math.min(100, Math.max(0, parseFloat(e.target.value) || 0));
-    setInterestRate(value);
+    const value = Math.min(100, Math.max(0, parseFloat(e.target.value)));
+    if (isNaN(value)) {
+      setInterestRate("");
+    } else {
+      setInterestRate(value);
+    }
   };
 
   const handleAdditionalContributionsChange = (e) => {
-    const value = Math.min(
-      10000000,
-      Math.max(0, parseInt(e.target.value) || 0)
-    );
-    setAdditionalContributions(value);
-  };
-
-  const handleSliderCapitalChange = (e) => {
-    setInitialCapital(parseInt(e.target.value));
-  };
-
-  const handleSliderTermChange = (e) => {
-    setInvestmentTerm(parseInt(e.target.value));
-  };
-
-  const handleSliderRateChange = (e) => {
-    setInterestRate(parseFloat(e.target.value));
-  };
-
-  const handleSliderContributionsChange = (e) => {
-    setAdditionalContributions(parseInt(e.target.value));
+    const value = Math.min(10000000, Math.max(0, parseInt(e.target.value)));
+    if (isNaN(value)) {
+      setAdditionalContributions("");
+    } else {
+      setAdditionalContributions(value);
+    }
   };
 
   // Расчет сложного процента с регулярными пополнениями
@@ -146,7 +141,7 @@ const InvestmentCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 gap-8">
           {/* Верхняя часть: Параметры инвестирования */}
@@ -187,15 +182,7 @@ const InvestmentCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1000000000"
-                  step="1000"
-                  value={initialCapital}
-                  onChange={handleSliderCapitalChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущая сумма:</span>{" "}
                   {formatCurrency(initialCapital)}
@@ -232,14 +219,7 @@ const InvestmentCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max={termType === "months" ? 360 : 30}
-                  value={investmentTerm}
-                  onChange={handleSliderTermChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 flex space-x-4">
                   <button
                     onClick={() => setTermType("months")}
@@ -301,15 +281,7 @@ const InvestmentCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  step="0.1"
-                  value={interestRate}
-                  onChange={handleSliderRateChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущая ставка:</span>{" "}
                   {interestRate}%
@@ -417,15 +389,7 @@ const InvestmentCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="10000000"
-                  step="1000"
-                  value={additionalContributions}
-                  onChange={handleSliderContributionsChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 flex space-x-4">
                   <button
                     onClick={() => setContributionFrequency("monthly")}
@@ -449,19 +413,6 @@ const InvestmentCalculator = () => {
                   </button>
                 </div>
               </div>
-
-              {/* Информационная панель */}
-              <div className="lg:col-span-3 bg-linear-to-r from-blue-100 to-cyan-100 p-4 rounded-xl border border-blue-200">
-                <h4 className="font-bold text-blue-800 mb-2">
-                  💡 Совет инвестора
-                </h4>
-                <ul className="text-sm text-blue-700 space-y-1">
-                  <li>• Регулярные инвестиции снижают риски</li>
-                  <li>• Реинвестирование прибыли ускоряет рост капитала</li>
-                  <li>• Долгосрочные инвестиции приносят больше доход</li>
-                  <li>• Диверсифицируйте инвестиционный портфель</li>
-                </ul>
-              </div>
             </div>
           </div>
 
@@ -470,230 +421,216 @@ const InvestmentCalculator = () => {
             <h2 className="text-2xl font-bold text-blue-700 mb-6 pb-3 border-b border-blue-100">
               Результаты инвестирования
             </h2>
-
-            {/* Основные показатели */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
-                <div className="text-sm text-blue-600 mb-2">Итоговая сумма</div>
-                <div className="text-2xl font-bold text-blue-800">
-                  {formatCurrency(finalAmount)}
-                </div>
-                <div className="text-xs text-blue-500 mt-2">
-                  Через {investmentTerm}{" "}
-                  {termType === "months" ? "месяцев" : "лет"}
-                </div>
-              </div>
-
-              <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
-                <div className="text-sm text-blue-600 mb-2">Всего вложено</div>
-                <div className="text-2xl font-bold text-blue-800">
-                  {formatCurrency(totalInvested)}
-                </div>
-                <div className="text-xs text-blue-500 mt-2">
-                  Ваши инвестиции
-                </div>
-              </div>
-
-              <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
-                <div className="text-sm text-blue-600 mb-2">Чистая прибыль</div>
-                <div className="text-2xl font-bold text-blue-800">
-                  {formatCurrency(totalProfit)}
-                </div>
-                <div className="text-xs text-blue-500 mt-2">
-                  {totalInvested > 0
-                    ? ((totalProfit / totalInvested) * 100).toFixed(1)
-                    : 0}
-                  % от вложений
-                </div>
-              </div>
-
-              <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
-                <div className="text-sm text-blue-600 mb-2">
-                  Годовая доходность
-                </div>
-                <div className="text-2xl font-bold text-blue-800">
-                  {calculateAnnualReturn().toFixed(2)}%
-                </div>
-                <div className="text-xs text-blue-500 mt-2">
-                  В среднем за год
-                </div>
-              </div>
-            </div>
-
-            {/* График роста капитала */}
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-blue-700 mb-4">
-                Рост капитала во времени
-              </h3>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-blue-50">
-                      <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
-                        Период
-                      </th>
-                      <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
-                        Сумма на счете
-                      </th>
-                      <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
-                        Всего вложено
-                      </th>
-                      <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
-                        Прибыль
-                      </th>
-                      <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
-                        Доходность
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {growthChart.map((item, index) => (
-                      <tr
-                        key={index}
-                        className="hover:bg-blue-50 transition-colors"
-                      >
-                        <td className="p-3 border-b border-blue-100 text-blue-800 font-medium">
-                          {item.period}
-                        </td>
-                        <td className="p-3 border-b border-blue-100 text-blue-800 font-semibold">
-                          {formatCurrency(item.amount)}
-                        </td>
-                        <td className="p-3 border-b border-blue-100 text-blue-700">
-                          {formatCurrency(item.invested)}
-                        </td>
-                        <td className="p-3 border-b border-blue-100 text-blue-700">
-                          {formatCurrency(item.profit)}
-                        </td>
-                        <td className="p-3 border-b border-blue-100 text-blue-700">
-                          {item.invested > 0
-                            ? ((item.profit / item.invested) * 100).toFixed(1) +
-                              "%"
-                            : "0%"}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Визуализация распределения */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-linear-to-r from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
-                <h4 className="font-bold text-blue-800 mb-4">
-                  📊 Структура итоговой суммы
-                </h4>
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm text-blue-700">
-                        Ваши вложения
-                      </span>
-                      <span className="text-sm font-medium text-blue-800">
-                        {formatCurrency(totalInvested)} (
-                        {((totalInvested / finalAmount) * 100).toFixed(1)}%)
-                      </span>
+            {initialCapital && investmentTerm && interestRate ? (
+              <>
+                {/* Основные показатели */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
+                    <div className="text-sm text-blue-600 mb-2">
+                      Итоговая сумма
                     </div>
-                    <div className="w-full bg-blue-200 rounded-full h-2">
-                      <div
-                        className="bg-blue-600 h-2 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${(totalInvested / finalAmount) * 100}%`,
-                        }}
-                      ></div>
+                    <div className="text-2xl font-bold text-blue-800">
+                      {formatCurrency(finalAmount)}
+                    </div>
+                    <div className="text-xs text-blue-500 mt-2">
+                      Через {investmentTerm}{" "}
+                      {termType === "months" ? "месяцев" : "лет"}
                     </div>
                   </div>
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm text-blue-700">
-                        Накопленная прибыль
-                      </span>
-                      <span className="text-sm font-medium text-blue-800">
-                        {formatCurrency(totalProfit)} (
-                        {((totalProfit / finalAmount) * 100).toFixed(1)}%)
-                      </span>
+
+                  <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
+                    <div className="text-sm text-blue-600 mb-2">
+                      Всего вложено
                     </div>
-                    <div className="w-full bg-green-200 rounded-full h-2">
-                      <div
-                        className="bg-green-500 h-2 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${(totalProfit / finalAmount) * 100}%`,
-                        }}
-                      ></div>
+                    <div className="text-2xl font-bold text-blue-800">
+                      {formatCurrency(totalInvested)}
+                    </div>
+                    <div className="text-xs text-blue-500 mt-2">
+                      Ваши инвестиции
+                    </div>
+                  </div>
+
+                  <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
+                    <div className="text-sm text-blue-600 mb-2">
+                      Чистая прибыль
+                    </div>
+                    <div className="text-2xl font-bold text-blue-800">
+                      {formatCurrency(totalProfit)}
+                    </div>
+                    <div className="text-xs text-blue-500 mt-2">
+                      {totalInvested > 0
+                        ? ((totalProfit / totalInvested) * 100).toFixed(1)
+                        : 0}
+                      % от вложений
+                    </div>
+                  </div>
+
+                  <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
+                    <div className="text-sm text-blue-600 mb-2">
+                      Годовая доходность
+                    </div>
+                    <div className="text-2xl font-bold text-blue-800">
+                      {calculateAnnualReturn().toFixed(2)}%
+                    </div>
+                    <div className="text-xs text-blue-500 mt-2">
+                      В среднем за год
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="bg-linear-to-r from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
-                <h4 className="font-bold text-blue-800 mb-3">
-                  📈 Эффект сложного процента
-                </h4>
-                <div className="text-sm text-blue-700 space-y-2">
-                  <p>
-                    Сложный процент — это когда проценты начисляются на
-                    проценты.
-                  </p>
-                  <p>
-                    При ежемесячном реинвестировании ваш капитал растет быстрее:
-                  </p>
-                  <ul className="space-y-1">
-                    <li>
-                      • {interestRate}% годовых ={" "}
-                      {(Math.pow(1 + interestRate / 100 / 12, 12) - 1).toFixed(
-                        2
-                      ) * 100}
-                      % эффективно
-                    </li>
-                    <li>
-                      • За {investmentTerm}{" "}
-                      {termType === "months" ? "месяцев" : "лет"} ваш капитал
-                      увеличится в {(finalAmount / initialCapital).toFixed(1)}{" "}
-                      раза
-                    </li>
-                  </ul>
+                {/* График роста капитала */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-blue-700 mb-4">
+                    Рост капитала во времени
+                  </h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse">
+                      <thead>
+                        <tr className="bg-blue-50">
+                          <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
+                            Период
+                          </th>
+                          <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
+                            Сумма на счете
+                          </th>
+                          <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
+                            Всего вложено
+                          </th>
+                          <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
+                            Прибыль
+                          </th>
+                          <th className="p-3 text-left text-blue-700 font-semibold border-b border-blue-200">
+                            Доходность
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {growthChart.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="hover:bg-blue-50 transition-colors"
+                          >
+                            <td className="p-3 border-b border-blue-100 text-blue-800 font-medium">
+                              {item.period}
+                            </td>
+                            <td className="p-3 border-b border-blue-100 text-blue-800 font-semibold">
+                              {formatCurrency(item.amount)}
+                            </td>
+                            <td className="p-3 border-b border-blue-100 text-blue-700">
+                              {formatCurrency(item.invested)}
+                            </td>
+                            <td className="p-3 border-b border-blue-100 text-blue-700">
+                              {formatCurrency(item.profit)}
+                            </td>
+                            <td className="p-3 border-b border-blue-100 text-blue-700">
+                              {item.invested > 0
+                                ? ((item.profit / item.invested) * 100).toFixed(
+                                    1,
+                                  ) + "%"
+                                : "0%"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-            </div>
+
+                {/* Визуализация распределения */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="bg-linear-to-r from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
+                    <h4 className="font-bold text-blue-800 mb-4">
+                      📊 Структура итоговой суммы
+                    </h4>
+                    <div className="space-y-3">
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-sm text-blue-700">
+                            Ваши вложения
+                          </span>
+                          <span className="text-sm font-medium text-blue-800">
+                            {formatCurrency(totalInvested)} (
+                            {((totalInvested / finalAmount) * 100).toFixed(1)}%)
+                          </span>
+                        </div>
+                        <div className="w-full bg-blue-200 rounded-full h-2">
+                          <div
+                            className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                            style={{
+                              width: `${(totalInvested / finalAmount) * 100}%`,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-sm text-blue-700">
+                            Накопленная прибыль
+                          </span>
+                          <span className="text-sm font-medium text-blue-800">
+                            {formatCurrency(totalProfit)} (
+                            {((totalProfit / finalAmount) * 100).toFixed(1)}%)
+                          </span>
+                        </div>
+                        <div className="w-full bg-green-200 rounded-full h-2">
+                          <div
+                            className="bg-green-500 h-2 rounded-full transition-all duration-500"
+                            style={{
+                              width: `${(totalProfit / finalAmount) * 100}%`,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-linear-to-r from-blue-50 to-cyan-50 p-5 rounded-xl border border-blue-200">
+                    <h4 className="font-bold text-blue-800 mb-3">
+                      📈 Эффект сложного процента
+                    </h4>
+                    <div className="text-sm text-blue-700 space-y-2">
+                      <p>
+                        Сложный процент — это когда проценты начисляются на
+                        проценты.
+                      </p>
+                      <p>
+                        При ежемесячном реинвестировании ваш капитал растет
+                        быстрее:
+                      </p>
+                      <ul className="space-y-1">
+                        <li>
+                          • {interestRate}% годовых ={" "}
+                          {(
+                            Math.pow(1 + interestRate / 100 / 12, 12) - 1
+                          ).toFixed(2) * 100}
+                          % эффективно
+                        </li>
+                        <li>
+                          • За {investmentTerm}{" "}
+                          {termType === "months" ? "месяцев" : "лет"} ваш
+                          капитал увеличится в{" "}
+                          {(finalAmount / initialCapital).toFixed(1)} раза
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         </div>
-        <div className="text-gray-800 text-sm mt-16">
-          <details className="group">
-            <summary className="flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors duration-200 list-none">
-              <span className="font-medium text-gray-700 group-open:hidden">
-                Описание
-              </span>
-              <span className="font-medium text-gray-700 hidden group-open:inline">
-                Скрыть
-              </span>
-              <svg
-                className="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </summary>
-            <div className="overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-open:max-h-[2000px]">
-              <div className="p-4 pt-6">   
-        <div className="text-gray-800 text-sm mt-16">
-          {" "}
+        <Description_component>
           <p className="font-bold mt-6 text-center">
-            {" "}
             📈 Калькулятор Инвестора Онлайн | Рассчитать Доходность Инвестиций и
-            Сложный Процент{" "}
+            Сложный Процент
           </p>
           <p className="mt-6">
             <strong>Онлайн калькулятор инвестора</strong> — это мощный
             аналитический инструмент для расчета потенциальной доходности
             инвестиций, планирования финансовых целей и понимания работы
-            сложного процента. Наш{" "}
+            сложного процента. Наш
             <strong>бесплатный инвестиционный калькулятор</strong> поможет вам
             принимать взвешенные финансовые решения и строить долгосрочные
             стратегии.
@@ -849,11 +786,7 @@ const InvestmentCalculator = () => {
             рассчитать инвестиции, калькулятор капитализации, калькулятор
             регулярных инвестиций, финансовая цель
           </p>
-        </div>
-        </div>
-    </div>
-  </details>
-</div>
+        </Description_component>
       </div>
     </div>
   );

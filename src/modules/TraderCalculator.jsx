@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Description_component from "../components/Description_component";
 
 const TraderCalculator = () => {
   // Состояния для параметров трейдинга
@@ -14,8 +15,6 @@ const TraderCalculator = () => {
   const [totalProfit, setTotalProfit] = useState(0);
   const [profitPercentage, setProfitPercentage] = useState(0);
   const [averageMonthlyProfit, setAverageMonthlyProfit] = useState(0);
-  const [maxDrawdown, setMaxDrawdown] = useState(0);
-  const [tradingResults, setTradingResults] = useState([]);
   const [monthlyPerformance, setMonthlyPerformance] = useState([]);
 
   // Форматирование чисел
@@ -32,7 +31,7 @@ const TraderCalculator = () => {
   const handleInitialDepositChange = (e) => {
     const value = Math.min(
       100000000,
-      Math.max(0, parseInt(e.target.value) || 0)
+      Math.max(0, parseInt(e.target.value) || 0),
     );
     setInitialDeposit(value);
   };
@@ -188,12 +187,10 @@ const TraderCalculator = () => {
     setProfitPercentage(
       initialDeposit > 0
         ? ((balance - initialDeposit) / initialDeposit) * 100
-        : 0
+        : 0,
     );
     setAverageMonthlyProfit((balance - initialDeposit) / monthsToSimulate);
-    setMaxDrawdown(drawdown);
     setMonthlyPerformance(monthlyResults);
-    setTradingResults(tradeHistory.slice(-20)); // Последние 20 сделок
   };
 
   // Расчет при изменении параметров
@@ -223,7 +220,7 @@ const TraderCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 gap-8">
           {/* Верхняя часть: Параметры трейдинга */}
@@ -264,15 +261,7 @@ const TraderCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1000000"
-                  step="10000"
-                  value={initialDeposit}
-                  onChange={handleSliderDepositChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущая сумма:</span>{" "}
                   {formatCurrency(initialDeposit)}
@@ -310,15 +299,7 @@ const TraderCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="50"
-                  step="1"
-                  value={tradesPerMonth}
-                  onChange={handleSliderTradesChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущее значение:</span>{" "}
                   {tradesPerMonth}
@@ -356,15 +337,7 @@ const TraderCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  step="1"
-                  value={winRate}
-                  onChange={handleSliderWinRateChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущее значение:</span>{" "}
                   {winRate}%
@@ -402,15 +375,7 @@ const TraderCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="5"
-                  step="0.1"
-                  value={riskRewardRatio}
-                  onChange={handleSliderRatioChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущее значение:</span> 1:
                   {riskRewardRatio}
@@ -448,15 +413,7 @@ const TraderCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="0.5"
-                  max="10"
-                  step="0.1"
-                  value={riskPerTrade}
-                  onChange={handleSliderRiskChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущее значение:</span>{" "}
                   {riskPerTrade}%
@@ -494,15 +451,7 @@ const TraderCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="24"
-                  step="1"
-                  value={monthsToSimulate}
-                  onChange={handleSliderMonthsChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущее значение:</span>{" "}
                   {monthsToSimulate} месяцев
@@ -668,205 +617,166 @@ const TraderCalculator = () => {
             </div>
           </div>
         </div>
-        <div className="text-gray-800 text-sm mt-16">
-          <details className="group">
-            <summary className="flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors duration-200 list-none">
-              <span className="font-medium text-gray-700 group-open:hidden">
-                Описание
+
+        <Description_component>
+          <p className="font-bold mt-6 text-center">
+            📊 Калькулятор Трейдера Онлайн | Рассчитать Сделку, Риск и Прибыль
+            на Форекс и Бирже{" "}
+          </p>
+          <p className="mt-6">
+            <strong>Онлайн калькулятор трейдера</strong> — это профессиональный
+            инструмент для точного расчета параметров торговой сделки,
+            управления рисками и планирования прибыли на финансовых рынках. Наш{" "}
+            <strong>бесплатный калькулятор для трейдинга</strong> помогает
+            принимать обоснованные решения и строго следовать торговой
+            стратегии.
+          </p>
+          <p className="mt-6 font-bold">
+            Основные возможности калькулятора трейдера:
+          </p>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+            <li className="flex items-start">
+              <span className="mr-2">✓</span>
+              <span>
+                <strong>Калькулятор позиции трейдера</strong> — точный расчет
+                объема сделки (лота) на основе капитала и риска
               </span>
-              <span className="font-medium text-gray-700 hidden group-open:inline">
-                Скрыть
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Калькулятор риска трейдера</strong> — определение
+                максимального убытка в деньгах и процентах от депозита
               </span>
-              <svg
-                className="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </summary>
-            <div className="overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-open:max-h-[2000px]">
-              <div className="p-4 pt-6">
-                <div className="text-gray-800 text-sm mt-16">
-                  {" "}
-                  <p className="font-bold mt-6 text-center">
-                    {" "}
-                    📊 Калькулятор Трейдера Онлайн | Рассчитать Сделку, Риск и
-                    Прибыль на Форекс и Бирже{" "}
-                  </p>
-                  <p className="mt-6">
-                    <strong>Онлайн калькулятор трейдера</strong> — это
-                    профессиональный инструмент для точного расчета параметров
-                    торговой сделки, управления рисками и планирования прибыли
-                    на финансовых рынках. Наш{" "}
-                    <strong>бесплатный калькулятор для трейдинга</strong>{" "}
-                    помогает принимать обоснованные решения и строго следовать
-                    торговой стратегии.
-                  </p>
-                  <p className="mt-6 font-bold">
-                    Основные возможности калькулятора трейдера:
-                  </p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-                    <li className="flex items-start">
-                      <span className="mr-2">✓</span>
-                      <span>
-                        <strong>Калькулятор позиции трейдера</strong> — точный
-                        расчет объема сделки (лота) на основе капитала и риска
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Калькулятор риска трейдера</strong> —
-                        определение максимального убытка в деньгах и процентах
-                        от депозита
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Калькулятор прибыли и убытка</strong> —
-                        вычисление потенциального профита и лосса для заданных
-                        уровней
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        Мгновенный пересчет параметров сделки при изменении
-                        условий рынка
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Калькулятор сделки на Форекс</strong> — расчет
-                        пунктов, стоимости пункта и свопов для валютных пар
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Калькулятор маржи и плеча</strong> — вычисление
-                        требуемого залога (маржи) для открытия позиции с
-                        кредитным плечом
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Калькулятор для трейдера на компьютере</strong>{" "}
-                        — работает в браузере, не требует установки
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Калькулятор соотношения риск/прибыль</strong> —
-                        оценка целесообразности сделки по параметру Reward/Risk
-                        (R/R)
-                      </span>
-                    </li>
-                  </ul>
-                  <p className="mt-6 font-bold">
-                    Почему выбирают наш калькулятор трейдера:
-                  </p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-                    <li className="flex items-start">
-                      <span className="mr-2">✓</span>
-                      <span>
-                        <strong>Быстрые и точные расчеты.</strong> Использование
-                        правильных биржевых формул для валют, акций, фьючерсов и
-                        криптовалют
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Профессиональный подход.</strong> Инструмент
-                        создан с учетом реальных потребностей действующих
-                        трейдеров
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Адаптивный интерфейс.</strong> Удобный ввод
-                        данных, мгновенные результаты и возможность сохранять
-                        расчеты
-                      </span>
-                    </li>
-                  </ul>
-                  <p className="mt-6 font-bold">
-                    Практическое применение калькулятора трейдера:
-                  </p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-                    <li className="flex items-start">
-                      <span className="mr-2">✓</span>
-                      <span>
-                        <strong>Форекс (Forex) торговля.</strong> Расчет сделок
-                        по EUR/USD, GBP/JPY и другим валютным парам
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Фондовый рынок.</strong> Планирование операций с
-                        акциями и ETF
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Криптовалютный трейдинг.</strong> Расчет позиций
-                        на биржах для Bitcoin (BTC), Ethereum (ETH) и альткоинов
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        <strong>Торговля фьючерсами и опционами.</strong> Расчет
-                        маржи, точек безубытка и потенциальной доходности
-                      </span>
-                    </li>
-                  </ul>
-                  <p className="mt-4">
-                    Наш <strong>калькулятор для расчета сделок</strong>{" "}
-                    использует точные формулы для определения{" "}
-                    <strong>объема позиции</strong> на основе выбранного{" "}
-                    <strong>процента риска</strong> от депозита,{" "}
-                    <strong>сумму потенциальной прибыли</strong> и{" "}
-                    <strong>убытка</strong>. Инструмент помогает строго
-                    контролировать риск на сделку.
-                  </p>
-                  <p className="mt-6">
-                    <strong>Бесплатный онлайн калькулятор трейдера</strong> —
-                    это ваша цифровая панель управления рисками! Попробуйте наш{" "}
-                    <strong>профессиональный калькулятор для трейдинга</strong>{" "}
-                    прямо сейчас — это лучший способ дисциплинировать свою
-                    торговлю, защитить депозит от эмоциональных решений и
-                    повысить шансы на долгосрочную прибыль.{" "}
-                    <strong>Незаменимый инструмент</strong> для серьезного
-                    трейдера!
-                  </p>
-                  <p className="mt-6">
-                    Популярные запросы: калькулятор трейдера, калькулятор
-                    позиции, калькулятор риска, калькулятор лота, форекс
-                    калькулятор, калькулятор сделки, рассчитать объем позиции,
-                    калькулятор прибыли и убытка, калькулятор маржи, риск
-                    менеджмент в трейдинге
-                  </p>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Калькулятор прибыли и убытка</strong> — вычисление
+                потенциального профита и лосса для заданных уровней
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                Мгновенный пересчет параметров сделки при изменении условий
+                рынка
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Калькулятор сделки на Форекс</strong> — расчет пунктов,
+                стоимости пункта и свопов для валютных пар
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Калькулятор маржи и плеча</strong> — вычисление
+                требуемого залога (маржи) для открытия позиции с кредитным
+                плечом
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Калькулятор для трейдера на компьютере</strong> —
+                работает в браузере, не требует установки
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Калькулятор соотношения риск/прибыль</strong> — оценка
+                целесообразности сделки по параметру Reward/Risk (R/R)
+              </span>
+            </li>
+          </ul>
+          <p className="mt-6 font-bold">
+            Почему выбирают наш калькулятор трейдера:
+          </p>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+            <li className="flex items-start">
+              <span className="mr-2">✓</span>
+              <span>
+                <strong>Быстрые и точные расчеты.</strong> Использование
+                правильных биржевых формул для валют, акций, фьючерсов и
+                криптовалют
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Профессиональный подход.</strong> Инструмент создан с
+                учетом реальных потребностей действующих трейдеров
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Адаптивный интерфейс.</strong> Удобный ввод данных,
+                мгновенные результаты и возможность сохранять расчеты
+              </span>
+            </li>
+          </ul>
+          <p className="mt-6 font-bold">
+            Практическое применение калькулятора трейдера:
+          </p>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+            <li className="flex items-start">
+              <span className="mr-2">✓</span>
+              <span>
+                <strong>Форекс (Forex) торговля.</strong> Расчет сделок по
+                EUR/USD, GBP/JPY и другим валютным парам
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Фондовый рынок.</strong> Планирование операций с акциями
+                и ETF
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Криптовалютный трейдинг.</strong> Расчет позиций на
+                биржах для Bitcoin (BTC), Ethereum (ETH) и альткоинов
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                <strong>Торговля фьючерсами и опционами.</strong> Расчет маржи,
+                точек безубытка и потенциальной доходности
+              </span>
+            </li>
+          </ul>
+          <p className="mt-4">
+            Наш <strong>калькулятор для расчета сделок</strong> использует
+            точные формулы для определения <strong>объема позиции</strong> на
+            основе выбранного <strong>процента риска</strong> от депозита,{" "}
+            <strong>сумму потенциальной прибыли</strong> и{" "}
+            <strong>убытка</strong>. Инструмент помогает строго контролировать
+            риск на сделку.
+          </p>
+          <p className="mt-6">
+            <strong>Бесплатный онлайн калькулятор трейдера</strong> — это ваша
+            цифровая панель управления рисками! Попробуйте наш{" "}
+            <strong>профессиональный калькулятор для трейдинга</strong> прямо
+            сейчас — это лучший способ дисциплинировать свою торговлю, защитить
+            депозит от эмоциональных решений и повысить шансы на долгосрочную
+            прибыль. <strong>Незаменимый инструмент</strong> для серьезного
+            трейдера!
+          </p>
+          <p className="mt-6">
+            Популярные запросы: калькулятор трейдера, калькулятор позиции,
+            калькулятор риска, калькулятор лота, форекс калькулятор, калькулятор
+            сделки, рассчитать объем позиции, калькулятор прибыли и убытка,
+            калькулятор маржи, риск менеджмент в трейдинге
+          </p>
+        </Description_component>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import Description_component from "../components/Description_component";
 
 const RandomNumberGenerator = () => {
   // Состояния для полей ввода
@@ -16,10 +17,13 @@ const RandomNumberGenerator = () => {
     const numMax = Math.max(min, max);
 
     const newNumbers = [];
-    for (let i = 0; i < numCount; i++) {
-      const randomNum =
-        Math.floor(Math.random() * (numMax - numMin + 1)) + numMin;
-      newNumbers.push(randomNum);
+
+    if (!isNaN(numMin) || !isNaN(numMax)) {
+      for (let i = 0; i < numCount; i++) {
+        const randomNum =
+          Math.floor(Math.random() * (numMax - numMin + 1)) + numMin;
+        newNumbers.push(randomNum);
+      }
     }
 
     setNumbers(newNumbers);
@@ -32,16 +36,20 @@ const RandomNumberGenerator = () => {
 
   // Обработчики изменения полей ввода
   const handleCountChange = (e) => {
-    const value = Math.min(Math.max(1, parseInt(e.target.value) || 1), 30);
-    setCount(value);
+    const value = Math.min(Math.max(0, parseInt(e.target.value)), 30);
+    if (isNaN(value)) {
+      setCount("");
+    } else {
+      setCount(value);
+    }
   };
 
   const handleMinChange = (e) => {
-    setMin(parseInt(e.target.value) || 0);
+    setMin(parseInt(e.target.value));
   };
 
   const handleMaxChange = (e) => {
-    setMax(parseInt(e.target.value) || 100);
+    setMax(parseInt(e.target.value));
   };
 
   // Функция для копирования чисел в буфер обмена
@@ -51,7 +59,7 @@ const RandomNumberGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Левая колонка: Параметры генерации */}
@@ -69,7 +77,7 @@ const RandomNumberGenerator = () => {
                 <div className="relative">
                   <input
                     type="number"
-                    min="1"
+                    min="0"
                     max="30"
                     value={count}
                     onChange={handleCountChange}
@@ -177,7 +185,7 @@ const RandomNumberGenerator = () => {
                 </h2>
                 <button
                   onClick={copyToClipboard}
-                  className="bg-linear-to-r from-blue-500 to-teal-500 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-teal-600 transition-all flex items-center shadow-md hover:shadow-lg"
+                  className="max-md:hidden bg-linear-to-r from-blue-500 to-teal-500 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-teal-600 transition-all flex items-center shadow-md hover:shadow-lg"
                 >
                   <svg
                     className="w-5 h-5 mr-2"
@@ -218,127 +226,86 @@ const RandomNumberGenerator = () => {
           </div>
         </div>
 
-        {/* SEO-описание инструмента */}
-        <div className="text-gray-800 text-sm mt-16">
-          <details className="group">
-            <summary className="flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors duration-200 list-none">
-              <span className="font-medium text-gray-700 group-open:hidden">
-                Описание
+        <Description_component>
+          <p className="font-bold mt-6 text-center">
+            Генератор случайных чисел онлайн | Бесплатный инструмент для быстрой
+            генерации
+          </p>
+
+          <p className="mt-6">
+            <strong>Генератор случайных чисел</strong> — это мощный
+            онлайн-инструмент, позволяющий мгновенно создавать
+            последовательности случайных чисел для различных целей. Наш сервис
+            предлагает <strong>быструю генерацию случайных чисел онлайн</strong>
+            с возможностью настройки всех параметров.
+          </p>
+
+          <p className="mt-6 font-bold">Основные возможности генератора:</p>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+            <li className="flex items-start">
+              <span className="mr-2">✓</span>
+              <span>
+                Генерация случайных чисел от 1 до 100, 1000 или любого другого
+                диапазона
               </span>
-              <span className="font-medium text-gray-700 hidden group-open:inline">
-                Скрыть
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                Создание нескольких случайных чисел одновременно (до 30 чисел)
               </span>
-              <svg
-                className="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </summary>
-            <div className="overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-open:max-h-[2000px]">
-              <div className="p-4 pt-6">
-                <div className="text-gray-800 text-sm mt-16">
-                  <p className="font-bold mt-6 text-center">
-                    Генератор случайных чисел онлайн | Бесплатный инструмент для
-                    быстрой генерации
-                  </p>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                Настраиваемый диапазон чисел — от минимального до максимального
+                значения
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>Мгновенная генерация чисел без перезагрузки страницы</span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                Возможность копирования всех сгенерированных чисел одним кликом
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
+                Алгоритм псевдослучайных чисел для равномерного распределения
+              </span>
+            </li>
+          </ul>
 
-                  <p className="mt-6">
-                    <strong>Генератор случайных чисел</strong> — это мощный
-                    онлайн-инструмент, позволяющий мгновенно создавать
-                    последовательности случайных чисел для различных целей. Наш
-                    сервис предлагает{" "}
-                    <strong>быструю генерацию случайных чисел онлайн</strong>с
-                    возможностью настройки всех параметров.
-                  </p>
+          <p className="mt-4">
+            Наш <strong>генератор случайных цифр</strong> незаменим для
+            проведения лотерей, розыгрышей, случайного выбора победителей,
+            статистических выборок, научных исследований, тестирования
+            программного обеспечения и многих других задач. Инструмент работает
+            как <strong>рандомайзер чисел</strong> с заданными параметрами,
+            обеспечивая честный и непредвзятый результат.
+          </p>
 
-                  <p className="mt-6 font-bold">
-                    Основные возможности генератора:
-                  </p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-                    <li className="flex items-start">
-                      <span className="mr-2">✓</span>
-                      <span>
-                        Генерация случайных чисел от 1 до 100, 1000 или любого
-                        другого диапазона
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        Создание нескольких случайных чисел одновременно (до 30
-                        чисел)
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        Настраиваемый диапазон чисел — от минимального до
-                        максимального значения
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        Мгновенная генерация чисел без перезагрузки страницы
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        Возможность копирования всех сгенерированных чисел одним
-                        кликом
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className=" mr-2">✓</span>
-                      <span>
-                        Алгоритм псевдослучайных чисел для равномерного
-                        распределения
-                      </span>
-                    </li>
-                  </ul>
+          <p className="mt-6">
+            В отличие от других сервисов, наш{" "}
+            <strong>онлайн генератор случайных чисел</strong> предлагает
+            немедленную генерацию при каждом изменении параметров, интуитивно
+            понятный интерфейс, адаптивный дизайн для всех устройств и абсолютно
+            бесплатное использование без ограничений. Мы обеспечиваем{" "}
+            <strong>случайную выборку чисел</strong> с помощью проверенных
+            алгоритмов.
+          </p>
 
-                  <p className="mt-4">
-                    Наш <strong>генератор случайных цифр</strong> незаменим для
-                    проведения лотерей, розыгрышей, случайного выбора
-                    победителей, статистических выборок, научных исследований,
-                    тестирования программного обеспечения и многих других задач.
-                    Инструмент работает как <strong>рандомайзер чисел</strong> с
-                    заданными параметрами, обеспечивая честный и непредвзятый
-                    результат.
-                  </p>
-
-                  <p className="mt-6">
-                    В отличие от других сервисов, наш{" "}
-                    <strong>онлайн генератор случайных чисел</strong> предлагает
-                    немедленную генерацию при каждом изменении параметров,
-                    интуитивно понятный интерфейс, адаптивный дизайн для всех
-                    устройств и абсолютно бесплатное использование без
-                    ограничений. Мы обеспечиваем{" "}
-                    <strong>случайную выборку чисел</strong> с помощью
-                    проверенных алгоритмов.
-                  </p>
-
-                  <p className="mt-6">
-                    <strong>Генерация случайных чисел онлайн</strong> — это
-                    просто, быстро и удобно! Попробуйте наш инструмент прямо
-                    сейчас для любых ваших задач, требующих{" "}
-                    <strong>случайный выбор чисел</strong> или{" "}
-                    <strong>создание числовой последовательности</strong>.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
+          <p className="mt-6">
+            <strong>Генерация случайных чисел онлайн</strong> — это просто,
+            быстро и удобно! Попробуйте наш инструмент прямо сейчас для любых
+            ваших задач, требующих <strong>случайный выбор чисел</strong> или{" "}
+            <strong>создание числовой последовательности</strong>.
+          </p>
+        </Description_component>
       </div>
     </div>
   );
