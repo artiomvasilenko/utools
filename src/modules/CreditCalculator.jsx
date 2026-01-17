@@ -84,18 +84,6 @@ const CreditCalculator = () => {
     }
   };
 
-  const handleSliderAmountChange = (e) => {
-    setLoanAmount(parseInt(e.target.value));
-  };
-
-  const handleSliderTermChange = (e) => {
-    setLoanTerm(parseInt(e.target.value));
-  };
-
-  const handleSliderRateChange = (e) => {
-    setInterestRate(parseFloat(e.target.value));
-  };
-
   // Вычисление кредита
   useEffect(() => {
     const months = termType === "months" ? loanTerm : loanTerm * 12;
@@ -184,17 +172,9 @@ const CreditCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1000000000"
-                  step="1000"
-                  value={loanAmount}
-                  onChange={handleSliderAmountChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
-                  <span className="font-medium">Текущая сумма:</span>
+                  <span className="font-medium">Текущая сумма: </span>
                   {formatCurrency(loanAmount)}
                 </div>
               </div>
@@ -229,14 +209,7 @@ const CreditCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max={termType === "months" ? 360 : 30}
-                  value={loanTerm}
-                  onChange={handleSliderTermChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 flex space-x-4">
                   <button
                     onClick={() => setTermType("months")}
@@ -298,15 +271,7 @@ const CreditCalculator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  step="0.1"
-                  value={interestRate}
-                  onChange={handleSliderRateChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
+
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущая ставка:</span>{" "}
                   {interestRate}%
