@@ -61,7 +61,7 @@ const CreditCalculator = () => {
 
   // Обработчики изменений
   const handleLoanAmountChange = (e) => {
-    const value = Math.min(100000, Math.max(0, parseInt(e.target.value)));
+    const value = Math.min(1000000000, Math.max(0, parseInt(e.target.value)));
     if (isNaN(value)) {
       setLoanAmount("");
     } else {
@@ -120,7 +120,7 @@ const CreditCalculator = () => {
       const result = calculateDifferentiatedPayment(
         loanAmount,
         interestRate,
-        months,
+        months
       );
 
       setMonthlyPayment(Math.round(result.averagePayment));
@@ -523,6 +523,13 @@ const CreditCalculator = () => {
             <li className="flex items-start">
               <span className=" mr-2">✓</span>
               <span>
+                <strong>Калькулятор ипотеки</strong> — вычисление платежей для
+                покупки квартиры в ипотеку
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className=" mr-2">✓</span>
+              <span>
                 Мгновенный расчет графика платежей без перезагрузки страницы
               </span>
             </li>
@@ -570,7 +577,8 @@ const CreditCalculator = () => {
               <span className=" mr-2">✓</span>
               <span>
                 <strong>Детальная аналитика.</strong> Наглядный график платежей
-                с разбивкой на основной долг и проценты
+                с разбивкой на основной долг и проценты. Подходит как
+                калькулятор процентов
               </span>
             </li>
             <li className="flex items-start">

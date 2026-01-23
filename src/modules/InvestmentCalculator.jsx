@@ -525,7 +525,7 @@ const InvestmentCalculator = () => {
                             <td className="p-3 border-b border-blue-100 text-blue-700">
                               {item.invested > 0
                                 ? ((item.profit / item.invested) * 100).toFixed(
-                                    1,
+                                    1
                                   ) + "%"
                                 : "0%"}
                             </td>
@@ -732,6 +732,13 @@ const InvestmentCalculator = () => {
               <span>
                 <strong>Банковские вклады.</strong> Расчет конечной суммы по
                 депозиту с капитализацией процентов
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className="mr-2">✓</span>
+              <span>
+                <strong>Кальякулятор вкладов.</strong> Расчет суммы по вкладу с
+                капитализацией процентов и без
               </span>
             </li>
             <li className="flex items-start">
