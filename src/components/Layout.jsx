@@ -18,7 +18,7 @@ export default function Layout() {
   return (
     <>
       <Header isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <main className="flex">
+      <main className="flex min-h-screen">
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <main className="flex-1 p-4">
           <Suspense key={location.pathname} fallback={<SpinnerLoading />}>

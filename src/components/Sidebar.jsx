@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
   return (
     <aside
-      className={`md:w-64 h-screen bg-gray-800 text-white transform transition-transform duration-300 ease-in-out z-10 ${
+      className={`md:w-64 min-h-full  bg-gray-800 text-white transform transition-transform duration-300 ease-in-out z-10 ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       } md:translate-x-0 md:static fixed`}
     >
