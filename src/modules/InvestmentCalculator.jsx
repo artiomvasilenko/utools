@@ -223,7 +223,7 @@ const InvestmentCalculator = () => {
                 <div className="mt-2 flex space-x-4">
                   <button
                     onClick={() => setTermType("months")}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                       termType === "months"
                         ? "bg-blue-500 text-white shadow-md"
                         : "bg-blue-100 text-blue-700 hover:bg-blue-200"
@@ -233,7 +233,7 @@ const InvestmentCalculator = () => {
                   </button>
                   <button
                     onClick={() => setTermType("years")}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                       termType === "years"
                         ? "bg-blue-500 text-white shadow-md"
                         : "bg-blue-100 text-blue-700 hover:bg-blue-200"
@@ -296,7 +296,7 @@ const InvestmentCalculator = () => {
                 <div className="space-y-3">
                   <button
                     onClick={() => setReinvestmentPeriod("monthly")}
-                    className={`w-full p-4 rounded-xl border-2 transition-all ${
+                    className={`w-full p-4 rounded-xl border-2 transition-all cursor-pointer ${
                       reinvestmentPeriod === "monthly"
                         ? "border-blue-500 bg-blue-50 shadow-sm"
                         : "border-blue-200 bg-white hover:bg-blue-50"
@@ -327,7 +327,7 @@ const InvestmentCalculator = () => {
 
                   <button
                     onClick={() => setReinvestmentPeriod("yearly")}
-                    className={`w-full p-4 rounded-xl border-2 transition-all ${
+                    className={`w-full p-4 rounded-xl border-2 transition-all cursor-pointer ${
                       reinvestmentPeriod === "yearly"
                         ? "border-blue-500 bg-blue-50 shadow-sm"
                         : "border-blue-200 bg-white hover:bg-blue-50"
@@ -393,7 +393,7 @@ const InvestmentCalculator = () => {
                 <div className="mt-2 flex space-x-4">
                   <button
                     onClick={() => setContributionFrequency("monthly")}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                       contributionFrequency === "monthly"
                         ? "bg-blue-500 text-white shadow-md"
                         : "bg-blue-100 text-blue-700 hover:bg-blue-200"
@@ -403,7 +403,7 @@ const InvestmentCalculator = () => {
                   </button>
                   <button
                     onClick={() => setContributionFrequency("yearly")}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                       contributionFrequency === "yearly"
                         ? "bg-blue-500 text-white shadow-md"
                         : "bg-blue-100 text-blue-700 hover:bg-blue-200"
@@ -525,7 +525,7 @@ const InvestmentCalculator = () => {
                             <td className="p-3 border-b border-blue-100 text-blue-700">
                               {item.invested > 0
                                 ? ((item.profit / item.invested) * 100).toFixed(
-                                    1
+                                    1,
                                   ) + "%"
                                 : "0%"}
                             </td>

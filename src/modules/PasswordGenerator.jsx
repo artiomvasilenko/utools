@@ -63,14 +63,6 @@ const PasswordGenerator = () => {
     }
   };
 
-  const handleSliderCountChange = (e) => {
-    setPasswordCount(parseInt(e.target.value));
-  };
-
-  const handleSliderLengthChange = (e) => {
-    setPasswordLength(parseInt(e.target.value));
-  };
-
   const copyToClipboard = () => {
     const text = passwords.join("\n");
     navigator.clipboard.writeText(text).then(() => {
@@ -148,14 +140,6 @@ const PasswordGenerator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="7"
-                  value={passwordCount}
-                  onChange={handleSliderCountChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущее значение:</span>{" "}
                   {passwordCount}
@@ -192,14 +176,6 @@ const PasswordGenerator = () => {
                     </svg>
                   </div>
                 </div>
-                <input
-                  type="range"
-                  min="4"
-                  max="18"
-                  value={passwordLength}
-                  onChange={handleSliderLengthChange}
-                  className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
-                />
                 <div className="mt-2 text-sm text-blue-500">
                   <span className="font-medium">Текущее значение:</span>{" "}
                   {passwordLength}
@@ -217,7 +193,7 @@ const PasswordGenerator = () => {
                   <span className="text-blue-800">Заглавные буквы (A-Z)</span>
                   <button
                     onClick={() => setIncludeUppercase(!includeUppercase)}
-                    className={`relative inline-flex h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
+                    className={`relative inline-flex cursor-pointer h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
                       includeUppercase ? "bg-blue-500" : "bg-blue-200"
                     }`}
                   >
@@ -234,7 +210,7 @@ const PasswordGenerator = () => {
                   <span className="text-blue-800">Строчные буквы (a-z)</span>
                   <button
                     onClick={() => setIncludeLowercase(!includeLowercase)}
-                    className={`relative inline-flex h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
+                    className={`relative inline-flex cursor-pointer h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
                       includeLowercase ? "bg-blue-500" : "bg-blue-200"
                     }`}
                   >
@@ -251,7 +227,7 @@ const PasswordGenerator = () => {
                   <span className="text-blue-800">Цифры (0-9)</span>
                   <button
                     onClick={() => setIncludeNumbers(!includeNumbers)}
-                    className={`relative inline-flex h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
+                    className={`relative inline-flex cursor-pointer h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
                       includeNumbers ? "bg-blue-500" : "bg-blue-200"
                     }`}
                   >
@@ -268,7 +244,7 @@ const PasswordGenerator = () => {
                   <span className="text-blue-800">Спецсимволы (!@#$%)</span>
                   <button
                     onClick={() => setIncludeSpecial(!includeSpecial)}
-                    className={`relative inline-flex h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
+                    className={`relative inline-flex cursor-pointer h-6 w-11 min-w-11 items-center rounded-full transition-colors duration-300 ${
                       includeSpecial ? "bg-blue-500" : "bg-blue-200"
                     }`}
                   >
@@ -305,7 +281,7 @@ const PasswordGenerator = () => {
                 </h2>
                 <button
                   onClick={copyToClipboard}
-                  className="max-md:hidden text-xs bg-linear-to-r from-blue-500 to-cyan-500 text-white px-5 py-2.5 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all flex items-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                  className="max-md:hidden cursor-pointer text-xs bg-linear-to-r from-blue-500 to-cyan-500 text-white px-5 py-2.5 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all flex items-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                 >
                   {copied ? (
                     <>
@@ -375,11 +351,11 @@ const PasswordGenerator = () => {
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <div className="text-sm font-semibold text-blue-300 bg-blue-50 px-3 py-1 rounded-full">
+                            <div className="text-sm font-semibold text-blue-300 bg-blue-50 px-3 py-1 rounded-full cursor-default">
                               №{index + 1}
                             </div>
                             <span
-                              className={`text-xs font-semibold px-2 py-1 rounded-full ${strengthColor}`}
+                              className={`text-xs font-semibold px-2 py-1 rounded-full ${strengthColor} cursor-default`}
                             >
                               {strengthText}
                             </span>
@@ -390,7 +366,7 @@ const PasswordGenerator = () => {
                         </div>
                         <button
                           onClick={() => copySinglePassword(password)}
-                          className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition-colors flex items-center justify-center md:justify-start whitespace-nowrap"
+                          className="bg-blue-100 hover:bg-blue-200 text-blue-700  cursor-pointer px-4 py-2 rounded-lg transition-colors flex items-center justify-center md:justify-start whitespace-nowrap"
                         >
                           <svg
                             className="w-4 h-4 mr-2"

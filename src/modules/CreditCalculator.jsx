@@ -213,7 +213,7 @@ const CreditCalculator = () => {
                 <div className="mt-2 flex space-x-4">
                   <button
                     onClick={() => setTermType("months")}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                       termType === "months"
                         ? "bg-blue-500 text-white shadow-md"
                         : "bg-blue-100 text-blue-700 hover:bg-blue-200"
@@ -223,7 +223,7 @@ const CreditCalculator = () => {
                   </button>
                   <button
                     onClick={() => setTermType("years")}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                       termType === "years"
                         ? "bg-blue-500 text-white shadow-md"
                         : "bg-blue-100 text-blue-700 hover:bg-blue-200"
@@ -286,7 +286,7 @@ const CreditCalculator = () => {
                 <div className="space-y-4">
                   <button
                     onClick={() => setPaymentType("annuity")}
-                    className={`w-full p-4 rounded-xl border-2 transition-all ${
+                    className={`w-full p-4 rounded-xl border-2 transition-all cursor-pointer ${
                       paymentType === "annuity"
                         ? "border-blue-500 bg-blue-50 shadow-sm"
                         : "border-blue-200 bg-white hover:bg-blue-50"
@@ -306,7 +306,7 @@ const CreditCalculator = () => {
 
                   <button
                     onClick={() => setPaymentType("differentiated")}
-                    className={`w-full p-4 rounded-xl border-2 transition-all ${
+                    className={`w-full p-4 rounded-xl border-2 transition-all cursor-pointer ${
                       paymentType === "differentiated"
                         ? "border-blue-500 bg-blue-50 shadow-sm"
                         : "border-blue-200 bg-white hover:bg-blue-50"

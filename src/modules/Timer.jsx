@@ -109,7 +109,7 @@ const Timer = () => {
 
           <div className="p-6">
             {/* Заголовок */}
-            <div className="text-center mb-6">
+            <div className="text-center mb-6 cursor-default">
               <h1
                 className={`text-2xl font-bold bg-linear-to-r ${
                   isComplete
@@ -172,7 +172,7 @@ const Timer = () => {
               )}
 
               {/* Отображение времени */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="absolute inset-0 flex flex-col items-center justify-center cursor-default">
                 <div
                   className={`text-5xl font-bold bg-linear-to-r ${
                     isComplete
