@@ -93,7 +93,7 @@ class VoteResultSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Poll
-        fields = ['id', 'question', 'allow_multiple', 'slug', 'options', 'total_votes', 'user_voted']
+        fields = ['question', 'options', 'total_votes', 'user_voted']
     
     def get_options(self, obj):
         """Возвращаем варианты с количеством голосов"""
