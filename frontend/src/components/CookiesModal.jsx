@@ -1,7 +1,10 @@
 function CookiesModal() {
   function closeCookiesModal() {
     document.getElementById("cookies-modal").classList.add("hidden");
-    document.cookie = "cookies-accepted; path=/";
+    let date = new Date();
+    date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + date.toUTCString();
+    document.cookie = "cookies-accepted=true; " + expires + "; path=/";
   }
   function hiddenCookiesModal() {
     if (document.cookie.indexOf("cookies-accepted") === 0) {

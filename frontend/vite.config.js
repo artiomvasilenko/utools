@@ -10,4 +10,10 @@ export default defineConfig({
     tailwindcss(),
     Sitemap({ hostname: "https://use-tools.ru" }),
   ],
+  base: "static/",
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+    manifest: true,
+  },
 });
