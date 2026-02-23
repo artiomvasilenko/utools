@@ -31,7 +31,7 @@ class PollCreateSerializer(serializers.ModelSerializer):
     options = serializers.ListField(
         child = serializers.CharField(max_length=200),
         write_only=True,
-        min_lenght = 1,
+        min_length = 1,
         max_length = 10,
     )
     

@@ -7,12 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 config.py
+*.pyc
+*.sqlite3
 
 node_modules
 dist
 dist-ssr
 *.local
 migrations
+__pycache__
 
 # Editor directories and files
 .vscode/*
