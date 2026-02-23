@@ -24,7 +24,7 @@ class PollDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Poll
-        fields = ['id', 'question', 'allow_multiple', 'slug', 'created_at', 'options']
+        fields = ['question', 'allow_multiple', 'slug', 'created_at', 'options']
 
 class PollCreateSerializer(serializers.ModelSerializer):
     """Сериализация опроса для создания"""
@@ -37,7 +37,7 @@ class PollCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Poll
-        fields = ['question', 'allow_multiple', 'options']
+        fields = ['options', 'slug']
         
     def validate_options(self, value):
         '''проверяем уникальность вариантов'''
