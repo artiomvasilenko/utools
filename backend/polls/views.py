@@ -39,6 +39,7 @@ class PollViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['post'])
     def vote(self, request):
+
         """Обработка голосования"""
         # Получаем или создаем сессию
         if not request.session.session_key:

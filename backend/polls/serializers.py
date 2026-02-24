@@ -37,7 +37,7 @@ class PollCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Poll
-        fields = ['options', 'slug']
+        fields = ['question', 'allow_multiple', 'options', 'slug']
         
     def validate_options(self, value):
         '''проверяем уникальность вариантов'''
