@@ -1,0 +1,1 @@
+import{j as s}from"./index-DS7rAa-O.js";function e(){return s.jsxs("div",{children:[s.jsx("h1",{className:"text-8xl",children:"Такой страницы не существует!"}),s.jsx("p",{className:"text-gray-400",children:"Что ты здесь хотел увидеть?"})]})}export{e as default};

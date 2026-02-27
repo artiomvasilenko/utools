@@ -18,7 +18,7 @@ const PollResults = () => {
   const fetchResults = async () => {
     try {
       const response = await fetch(
-        `/api/polls/${slug}/results/`,
+        window.location.origin + `/api/polls/${slug}/results/`,
       );
       if (!response.ok) {
         throw new Error("Результаты не найдены");

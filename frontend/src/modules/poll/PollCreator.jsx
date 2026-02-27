@@ -59,9 +59,8 @@ const PollCreator = () => {
 
     setIsSubmitting(true);
 
-    // тест, исправить
     try {
-      const response = await fetch("/api/polls/", {
+      const response = await fetch(window.location.origin + "/api/polls/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

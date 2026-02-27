@@ -19,7 +19,9 @@ const PollVote = () => {
 
   const fetchPoll = async () => {
     try {
-      const response = await fetch(`/api/polls/${slug}/`);
+      const response = await fetch(
+        window.location.origin + `/api/polls/${slug}/`,
+      );
       if (!response.ok) {
         throw new Error("Опрос не найден");
       }
@@ -72,13 +74,16 @@ const PollVote = () => {
         ? selectedOptions
         : [selectedOptions];
 
-      const response = await fetch("/api/polls/vote/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        window.location.origin + "/api/polls/vote/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ option_ids: optionIds }),
         },
-        body: JSON.stringify({ option_ids: optionIds }),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Ошибка при отправке голоса");
@@ -87,7 +92,7 @@ const PollVote = () => {
       const data = await response.json();
 
       // Перенаправляем на страницу результатов
-      navigate(`/poll/${slug}/results`);
+      navigate(window.location.origin + `/poll/${slug}/results`);
     } catch (err) {
       setError(err.message);
     } finally {
