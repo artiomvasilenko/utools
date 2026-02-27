@@ -1,0 +1,1 @@
+import{j as r}from"./index-Bg-q7TUz.js";function e(){return r.jsxs("div",{children:[r.jsx("h1",{className:"text-6xl",children:"Такой страницы не существует!"}),r.jsx("hr",{}),r.jsx("a",{href:"/",children:"На главную"})]})}export{e as default};

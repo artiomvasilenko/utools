@@ -12,7 +12,6 @@ export default function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   function toggleSidebar() {
-    console.log("toggleSidebar");
     setIsSidebarOpen(!isSidebarOpen);
   }
   return (

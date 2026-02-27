@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Description_component from "../../components/Description_component";
+import { fetchWithCSRF } from "../../components/csrf";
 
 const PollVote = () => {
   const { slug } = useParams();
@@ -74,7 +75,7 @@ const PollVote = () => {
         ? selectedOptions
         : [selectedOptions];
 
-      const response = await fetch(
+      const response = await fetchWithCSRF(
         window.location.origin + "/api/polls/vote/",
         {
           method: "POST",
@@ -86,7 +87,19 @@ const PollVote = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Ошибка при отправке голоса");
+        let errorMessage = "Ошибка при отправке голоса";
+
+        try {
+          const errorData = await response.json();
+          if (errorData && errorData.error) {
+            errorMessage = errorData.error;
+          }
+        } catch (e) {
+          // Если не удалось распарсить JSON, оставляем стандартное сообщение
+          console.error("Не удалось обработать ошибку сервера:", e);
+        }
+
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
@@ -142,10 +155,12 @@ const PollVote = () => {
             <h2 className="text-2xl font-bold text-red-600 mb-2">Ошибка</h2>
             <p className="text-blue-600 mb-6">{error}</p>
             <button
-              onClick={() => navigate("/")}
+              onClick={() =>
+                navigate(window.location.origin + `/poll/${slug}/results`)
+              }
               className="bg-linear-to-r from-blue-500 to-teal-500 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-teal-600 transition-all"
             >
-              На главную
+              К результатам
             </button>
           </div>
         </div>
@@ -157,55 +172,7 @@ const PollVote = () => {
     <div className="min-h-screen bg-linear-to-br from-blue-50 to-teal-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Левая колонка: Информация */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-xl p-6 border border-blue-100 animate-fadeIn">
-              <h2 className="text-2xl font-bold text-blue-700 mb-6 pb-3 border-b border-blue-100">
-                Информация
-              </h2>
-
-              <div className="space-y-4">
-                <div className="bg-linear-to-r from-cyan-100 to-teal-100 p-4 rounded-lg">
-                  <p className="text-sm text-blue-700">
-                    <span className="font-bold">Дата создания:</span>
-                    <br />
-                    {formatDate(poll.created_at)}
-                  </p>
-                </div>
-
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                  <p className="text-sm text-blue-700">
-                    <span className="font-bold">Тип голосования:</span>
-                    <br />
-                    {poll.allow_multiple
-                      ? "✓ Можно выбрать несколько вариантов"
-                      : "✓ Можно выбрать только один вариант"}
-                  </p>
-                </div>
-
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                  <p className="text-sm text-blue-700">
-                    <span className="font-bold">Всего вариантов:</span>
-                    <br />
-                    {poll.options.length}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 bg-linear-to-r from-cyan-100 to-teal-100 p-4 rounded-lg border border-blue-200">
-                <h3 className="font-bold text-blue-800 mb-2">
-                  ℹ️ Как голосовать
-                </h3>
-                <p className="text-sm text-blue-700">
-                  {poll.allow_multiple
-                    ? 'Отметьте все подходящие варианты и нажмите "Голосовать"'
-                    : 'Выберите один вариант и нажмите "Голосовать"'}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Правая колонка: Голосование */}
+          {/* Левая колонка: Голосование */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-xl p-6 border border-blue-100 animate-fadeIn">
               <div className="mb-6 pb-3 border-b border-blue-100">
@@ -302,6 +269,54 @@ const PollVote = () => {
                   </div>
                 )}
               </form>
+            </div>
+          </div>
+
+          {/* Правая колонка: Информация */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl shadow-xl p-6 border border-blue-100 animate-fadeIn">
+              <h2 className="text-2xl font-bold text-blue-700 mb-6 pb-3 border-b border-blue-100">
+                Информация
+              </h2>
+
+              <div className="space-y-4">
+                <div className="bg-linear-to-r from-cyan-100 to-teal-100 p-4 rounded-lg">
+                  <p className="text-sm text-blue-700">
+                    <span className="font-bold">Дата создания:</span>
+                    <br />
+                    {formatDate(poll.created_at)}
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                  <p className="text-sm text-blue-700">
+                    <span className="font-bold">Тип голосования:</span>
+                    <br />
+                    {poll.allow_multiple
+                      ? "✓ Можно выбрать несколько вариантов"
+                      : "✓ Можно выбрать только один вариант"}
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                  <p className="text-sm text-blue-700">
+                    <span className="font-bold">Всего вариантов:</span>
+                    <br />
+                    {poll.options.length}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 bg-linear-to-r from-cyan-100 to-teal-100 p-4 rounded-lg border border-blue-200">
+                <h3 className="font-bold text-blue-800 mb-2">
+                  ℹ️ Как голосовать
+                </h3>
+                <p className="text-sm text-blue-700">
+                  {poll.allow_multiple
+                    ? 'Отметьте все подходящие варианты и нажмите "Голосовать"'
+                    : 'Выберите один вариант и нажмите "Голосовать"'}
+                </p>
+              </div>
             </div>
           </div>
         </div>

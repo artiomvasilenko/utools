@@ -134,6 +134,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS settings - для разработки разрешаем всё
 CORS_ALLOW_ALL_ORIGINS = True  # только для разработки!
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React dev server
+    "http://127.0.0.1:3000",
+]
 
 # REST Framework settings
 REST_FRAMEWORK = {

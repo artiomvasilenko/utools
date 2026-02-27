@@ -1,6 +1,7 @@
 // components/PollCreator.jsx
 import React, { useState } from "react";
 import Description_component from "../../components/Description_component";
+import { fetchWithCSRF } from "../../components/csrf";
 
 const PollCreator = () => {
   const [question, setQuestion] = useState("");
@@ -60,17 +61,20 @@ const PollCreator = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(window.location.origin + "/api/polls/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetchWithCSRF(
+        window.location.origin + "/api/polls/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            question: question.trim(),
+            allow_multiple: allowMultiple,
+            options: validOptions,
+          }),
         },
-        body: JSON.stringify({
-          question: question.trim(),
-          allow_multiple: allowMultiple,
-          options: validOptions,
-        }),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Ошибка при создании опроса");
