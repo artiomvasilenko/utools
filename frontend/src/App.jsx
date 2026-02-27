@@ -5,20 +5,24 @@ import Layout from "./components/Layout";
 const Home = lazy(() => import("./modules/Home"));
 const Calculator = lazy(() => import("./modules/Calculator"));
 const Timer = lazy(() => import("./modules/Timer"));
-const RandomNumberGenerator = lazy(() =>
-  import("./modules/RandomNumberGenerator")
+const RandomNumberGenerator = lazy(
+  () => import("./modules/RandomNumberGenerator"),
 );
 const PasswordGenerator = lazy(() => import("./modules/PasswordGenerator"));
 const CreditCalculator = lazy(() => import("./modules/CreditCalculator"));
-const InvestmentCalculator = lazy(() =>
-  import("./modules/InvestmentCalculator")
+const InvestmentCalculator = lazy(
+  () => import("./modules/InvestmentCalculator"),
 );
 const TraderCalculator = lazy(() => import("./modules/TraderCalculator"));
 const Calendar = lazy(() => import("./modules/Calendar"));
-const CarSaleContractGenerator = lazy(() =>
-  import("./modules/CarSaleContractGenerator")
+const CarSaleContractGenerator = lazy(
+  () => import("./modules/CarSaleContractGenerator"),
 );
 const NotFound = lazy(() => import("./components/NotFound"));
+
+const PollCreator = lazy(() => import("./modules/poll/PollCreator"));
+const PollVote = lazy(() => import("./modules/poll/PollVote"));
+const PollResults = lazy(() => import("./modules/poll/PollResult"));
 
 const router = createBrowserRouter([
   {
@@ -54,6 +58,10 @@ const router = createBrowserRouter([
       { path: "calendar", element: <Calendar /> },
       { path: "calendar/:year", element: <Calendar /> },
       { path: "dkp", element: <CarSaleContractGenerator /> },
+      { path: "poll/create", element: <PollCreator /> },
+      { path: "poll/:slug", element: <PollVote /> },
+      { path: "poll/:slug/results", element: <PollResults /> },
+
       { path: "*", element: <NotFound /> },
     ],
   },

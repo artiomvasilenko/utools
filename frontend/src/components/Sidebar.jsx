@@ -93,6 +93,14 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
               📄 Договор купли-продажи автомобиля
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/poll/create"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              📊 Создание опроса
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>
