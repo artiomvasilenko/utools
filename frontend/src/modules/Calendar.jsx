@@ -189,6 +189,27 @@ const Calendar = () => {
     return "bg-white border-gray-200 text-gray-800";
   };
 
+  // Вычисление статистики для конкретного месяца
+  const getMonthStatistics = (month) => {
+    const workingDays = month.days.filter(
+      (d) => d.dayType === "workday" || d.isPreHoliday,
+    ).length;
+    const holidaysCount = month.days.filter((d) => d.isHoliday).length;
+    const weekendsCount = month.days.filter(
+      (d) => d.dayType === "weekend" || d.isWeekendTransfer,
+    ).length;
+    const preHolidaysCount = month.days.filter((d) => d.isPreHoliday).length;
+    const workHours =
+      preHolidaysCount * 7 + (workingDays - preHolidaysCount) * 8;
+
+    return {
+      workingDays,
+      holidaysCount,
+      weekendsCount,
+      workHours,
+    };
+  };
+
   useEffect(() => {
     if (year && year !== selectedYear) {
       setSelectedYear(year);
@@ -240,64 +261,95 @@ const Calendar = () => {
 
         {/* Календарь по месяцам */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 cursor-default">
-          {Object.entries(calendarData).map(([monthIndex, month]) => (
-            <div
-              key={monthIndex}
-              className="bg-white rounded-xl shadow-lg border border-blue-100 overflow-hidden"
-            >
-              <div className="bg-linear-to-r from-blue-500 to-cyan-500 p-4">
-                <h3 className="text-lg font-bold text-white text-center">
-                  {month.name} {selectedYear}
-                </h3>
-              </div>
+          {Object.entries(calendarData).map(([monthIndex, month]) => {
+            const monthStats = getMonthStatistics(month);
+            return (
+              <div
+                key={monthIndex}
+                className="bg-white rounded-xl shadow-lg border border-blue-100 overflow-hidden flex flex-col"
+              >
+                <div className="bg-linear-to-r from-blue-500 to-cyan-500 p-4">
+                  <h3 className="text-lg font-bold text-white text-center">
+                    {month.name} {selectedYear}
+                  </h3>
+                </div>
 
-              <div className="p-4">
-                {/* Заголовки дней недели */}
-                <div className="grid grid-cols-7 gap-1 mb-2">
-                  {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map(
-                    (day, idx) => (
+                <div className="p-4 flex-grow">
+                  {/* Заголовки дней недели */}
+                  <div className="grid grid-cols-7 gap-1 mb-2">
+                    {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map(
+                      (day, idx) => (
+                        <div
+                          key={idx}
+                          className="text-center text-xs font-semibold text-blue-600 py-1"
+                        >
+                          {day}
+                        </div>
+                      ),
+                    )}
+                  </div>
+
+                  {/* Дни месяца */}
+                  <div className="grid grid-cols-7 gap-1">
+                    {/* Пустые ячейки для выравнивания первого дня */}
+                    {Array.from({
+                      length:
+                        month.days[0].dayOfWeek === 0
+                          ? 6
+                          : month.days[0].dayOfWeek - 1,
+                    }).map((_, idx) => (
+                      <div key={`empty-${idx}`} className="h-10"></div>
+                    ))}
+
+                    {month.days.map((day) => (
                       <div
-                        key={idx}
-                        className="text-center text-xs font-semibold text-blue-600 py-1"
+                        key={day.date}
+                        className={`relative h-10 flex flex-col items-center justify-center border rounded-lg transition-all hover:scale-105 hover:shadow-sm ${getDayColor(
+                          day,
+                        )}`}
                       >
-                        {day}
+                        <div className="text-sm font-medium">{day.day}</div>
+                        <div className="text-xs opacity-75">
+                          {day.weekdayName}
+                        </div>
                       </div>
-                    ),
-                  )}
+                    ))}
+                  </div>
                 </div>
 
-                {/* Дни месяца */}
-                <div className="grid grid-cols-7 gap-1">
-                  {/* Пустые ячейки для выравнивания первого дня */}
-                  {Array.from({
-                    length:
-                      month.days[0].dayOfWeek === 0
-                        ? 6
-                        : month.days[0].dayOfWeek - 1,
-                  }).map((_, idx) => (
-                    <div key={`empty-${idx}`} className="h-10"></div>
-                  ))}
-
-                  {month.days.map((day) => (
-                    <div
-                      key={day.date}
-                      className={`relative h-10 flex flex-col items-center justify-center border rounded-lg transition-all hover:scale-105 hover:shadow-sm ${getDayColor(
-                        day,
-                      )}`}
-                    >
-                      <div className="text-sm font-medium">{day.day}</div>
-                      <div className="text-xs opacity-75">
-                        {day.weekdayName}
-                      </div>
-                    </div>
-                  ))}
+                {/* Статистика месяца */}
+                <div className="space-y-1 p-4 bg-gray-50 border-t border-blue-100 mt-auto">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-black">Рабочих:</span>
+                    <span className="font-semibold">
+                      {monthStats.workingDays}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-red-600">Праздники:</span>
+                    <span className="font-semibold">
+                      {monthStats.holidaysCount}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-blue-500">Выходных:</span>
+                    <span className="font-semibold">
+                      {monthStats.weekendsCount}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-green-500">Рабочих часов:</span>
+                    <span className="font-semibold">
+                      {monthStats.workHours}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Статистика */}
+        {/* Статистика за год */}
         <div className="bg-white rounded-2xl shadow-xl p-6 border border-blue-100">
           <h2 className="text-2xl font-bold text-blue-700 mb-6 pb-3 border-b border-blue-100">
             Статистика за {selectedYear} год
@@ -340,63 +392,6 @@ const Calendar = () => {
               <div className="text-xs text-blue-500 mt-2">
                 Государственные праздники
               </div>
-            </div>
-          </div>
-
-          {/* Информация о месяцах */}
-          <div className="mt-8">
-            <h3 className="text-lg font-semibold text-blue-700 mb-4">
-              📅 Распределение по месяцам
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {Object.entries(calendarData).map(([monthIndex, month]) => {
-                let workingDays = month.days.filter(
-                  (d) => d.dayType === "workday",
-                ).length;
-                const holidays = month.days.filter((d) => d.isHoliday).length;
-                const weekends = month.days.filter(
-                  (d) => d.dayType === "weekend",
-                ).length;
-                const preholiday = month.days.filter(
-                  (d) => d.isPreHoliday,
-                ).length;
-                let workHours = 0;
-                if (preholiday > 0) {
-                  workingDays += preholiday;
-                  workHours = preholiday * 7 + (workingDays - preholiday) * 8;
-                } else {
-                  workHours = workingDays * 8;
-                }
-
-                return (
-                  <div
-                    key={monthIndex}
-                    className="bg-blue-50 p-3 rounded-lg border border-blue-200"
-                  >
-                    <div className="font-semibold text-blue-800 text-sm mb-2">
-                      {month.name}
-                    </div>
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs">
-                        <span className="text-blue-600">Рабочих:</span>
-                        <span className="font-semibold">{workingDays}</span>
-                      </div>
-                      <div className="flex justify-between text-xs">
-                        <span className="text-red-600">Праздники:</span>
-                        <span className="font-semibold">{holidays}</span>
-                      </div>
-                      <div className="flex justify-between text-xs">
-                        <span className="text-blue-500">Выходных:</span>
-                        <span className="font-semibold">{weekends}</span>
-                      </div>
-                      <div className="flex justify-between text-xs">
-                        <span className="text-green-500">Рабочих часов:</span>
-                        <span className="font-semibold">{workHours}</span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </div>
