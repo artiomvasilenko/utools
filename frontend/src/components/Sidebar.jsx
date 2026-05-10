@@ -47,6 +47,14 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
           </li>
           <li>
             <NavLink
+              to="/nickname_generator"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              👤 Генератор никнейма
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/calculator"
               className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
@@ -115,6 +123,14 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
               className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
               📄 Склеить (объединить) PDF
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/heictojpg"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              📸 HEIC to JPG
             </NavLink>
           </li>
           <li>

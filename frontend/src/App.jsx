@@ -30,6 +30,8 @@ const RealInterestRate = lazy(() => import("./modules/RealInterestRate"));
 const TicTacToe = lazy(() => import("./modules/TicTacToe"));
 const PdfMerger = lazy(() => import("./modules/PdfMerger"));
 const CoinFlip = lazy(() => import("./modules/CoinFlip"));
+const NicknameGenerator = lazy(() => import("./modules/NicknameGenerator"));
+const HeicToJpg = lazy(() => import("./modules/HeicToJpg"));
 
 const router = createBrowserRouter([
   {
@@ -74,6 +76,8 @@ const router = createBrowserRouter([
       { path: "tictactoe", element: <TicTacToe /> },
       { path: "pdfmerger", element: <PdfMerger /> },
       { path: "coinflip", element: <CoinFlip /> },
+      { path: "nickname_generator", element: <NicknameGenerator /> },
+      { path: "heictojpg", element: <HeicToJpg /> },
 
       { path: "*", element: <NotFound /> },
     ],
