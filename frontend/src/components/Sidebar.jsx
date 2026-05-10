@@ -5,7 +5,7 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
     <aside
       className={`md:w-64   bg-gray-800 text-white transform transition-transform duration-300 ease-in-out z-10 ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } md:translate-x-0 md:static fixed`}
+      } md:translate-x-0 md:static absolute`}
     >
       <div className="p-4">
         <h2 className="text-lg font-bold">Инструменты</h2>
@@ -117,7 +117,14 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
               📄 Склеить (объединить) PDF
             </NavLink>
           </li>
-
+          <li>
+            <NavLink
+              to="/coinflip"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              🪙 Орёл или решка
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="/tictactoe"

@@ -29,6 +29,7 @@ const Cookies = lazy(() => import("./modules/Cookies"));
 const RealInterestRate = lazy(() => import("./modules/RealInterestRate"));
 const TicTacToe = lazy(() => import("./modules/TicTacToe"));
 const PdfMerger = lazy(() => import("./modules/PdfMerger"));
+const CoinFlip = lazy(() => import("./modules/CoinFlip"));
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
       { path: "real_interest_rate", element: <RealInterestRate /> },
       { path: "tictactoe", element: <TicTacToe /> },
       { path: "pdfmerger", element: <PdfMerger /> },
+      { path: "coinflip", element: <CoinFlip /> },
 
       { path: "*", element: <NotFound /> },
     ],
