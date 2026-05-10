@@ -221,6 +221,11 @@ const TraderCalculator = () => {
 
   return (
     <div className="min-h-screen">
+      <title>Калькулятор трейдера - Полезные инструменты - use-tools.ru</title>
+      <meta
+        name="description"
+        content="Калькулятор трейдера - инструмент поможет рассчитать раличные комбинации профита или стоп-лосса, процент побед и процент вложений, для эффективной торговли. "
+      />
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 gap-8">
           {/* Верхняя часть: Параметры трейдинга */}

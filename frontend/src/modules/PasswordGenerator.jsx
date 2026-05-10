@@ -101,6 +101,11 @@ const PasswordGenerator = () => {
 
   return (
     <div className="min-h-screen">
+      <title>Генератор паролей - Полезные инструменты - use-tools.ru</title>
+      <meta
+        name="description"
+        content="Генератор паролей поможет сгенерировать пароль высокой сложности"
+      />
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Левая колонка: Параметры генерации */}

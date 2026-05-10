@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Layout from "./components/Layout";
+import { User } from "lucide-react";
 
 const Home = lazy(() => import("./modules/Home"));
 const Calculator = lazy(() => import("./modules/Calculator"));
@@ -23,6 +24,7 @@ const NotFound = lazy(() => import("./components/NotFound"));
 const PollCreator = lazy(() => import("./modules/poll/PollCreator"));
 const PollVote = lazy(() => import("./modules/poll/PollVote"));
 const PollResults = lazy(() => import("./modules/poll/PollResult"));
+const UserAgreement = lazy(() => import("./modules/UserAgreement"));
 
 const router = createBrowserRouter([
   {
@@ -61,6 +63,7 @@ const router = createBrowserRouter([
       { path: "poll/create", element: <PollCreator /> },
       { path: "poll/:slug", element: <PollVote /> },
       { path: "poll/:slug/results", element: <PollResults /> },
+      { path: "useragreement", element: <UserAgreement /> },
 
       { path: "*", element: <NotFound /> },
     ],

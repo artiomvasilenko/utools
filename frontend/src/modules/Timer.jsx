@@ -91,6 +91,8 @@ const Timer = () => {
 
   return (
     <>
+      <title>Таймер - Полезные инструменты - use-tools.ru</title>
+      <meta name="description" content="Простой таймер" />
       <div className="w-full max-w-md mx-auto">
         {/* Основной контейнер таймера */}
         <div

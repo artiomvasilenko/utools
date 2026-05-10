@@ -142,6 +142,11 @@ const InvestmentCalculator = () => {
 
   return (
     <div className="min-h-screen">
+      <title>Калькулятор инвестора - Полезные инструменты - use-tools.ru</title>
+      <meta
+        name="description"
+        content="Калькулятор для инвестора, поможет рассчитать выгодны ли накопления"
+      />
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 gap-8">
           {/* Верхняя часть: Параметры инвестирования */}

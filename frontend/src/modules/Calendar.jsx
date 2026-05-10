@@ -198,6 +198,11 @@ const Calendar = () => {
 
   return (
     <div className="min-h-screen">
+      <title>Календарь - Полезные инструменты - use-tools.ru</title>
+      <meta
+        name="description"
+        content="Производственный календарь с выходными и праздниками"
+      />
       <div className="max-w-7xl mx-auto">
         {/* Шапка с переключателем годов */}
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-blue-100">

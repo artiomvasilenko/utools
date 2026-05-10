@@ -132,6 +132,11 @@ const CreditCalculator = () => {
 
   return (
     <div className="min-h-screen">
+      <title>Кредитный калькулятор - Полезные инструменты - use-tools.ru</title>
+      <meta
+        name="description"
+        content="Кредитный калькулятор - инструмент поможет рассчитать график платежей"
+      />
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 gap-8">
           {/* Верхняя часть: Параметры кредита */}

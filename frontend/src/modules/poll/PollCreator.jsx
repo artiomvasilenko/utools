@@ -96,6 +96,8 @@ const PollCreator = () => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 to-teal-50 py-8">
+      <title>Создать новый опрос - Полезные инструменты - use-tools.ru</title>
+      <meta name="description" content="Создать опрос" />
       <div className="max-w-4xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Левая колонка: Создание опроса */}

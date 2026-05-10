@@ -52,6 +52,8 @@ function Calculator() {
 
   return (
     <>
+      <title>Калькулятор - Полезные инструменты - use-tools.ru</title>
+      <meta name="description" content="Простой калькулятор" />
       <div className="flex items-center justify-center text-white">
         <div className="p-5 rounded-xl bg-gray-700 shadow-2xl">
           <div className="p-4 mb-4 text-3xl text-right bg-gray-900 text-green-500 rounded shadow-lg">

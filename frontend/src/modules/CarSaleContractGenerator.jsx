@@ -1133,6 +1133,11 @@ ___________________________                    ___________________________
 
   return (
     <div className="min-h-screen">
+      <title>Договор купли-продажи автомобиля - Полезные инструменты - use-tools.ru</title>
+      <meta
+        name="description"
+        content="Инструмент поможет создать договор купли-продажи автомобиля печатного образца"
+      />
       <div className="max-w-6xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-6 border border-blue-100 mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-blue-800 mb-2">
