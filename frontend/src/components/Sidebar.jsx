@@ -63,6 +63,14 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
           </li>
           <li>
             <NavLink
+              to="real_interest_rate"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              🏷️ Реальная процентная ставка по кредиту
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/investment_calculator"
               className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
@@ -103,12 +111,13 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
           </li>
           <li>
             <NavLink
-              to="real_interest_rate"
+              to="/pdfmerger"
               className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
             >
-              🏷️ Реальная процентная ставка по кредиту
+              📄 Склеить (объединить) PDF
             </NavLink>
           </li>
+
           <li>
             <NavLink
               to="/tictactoe"
