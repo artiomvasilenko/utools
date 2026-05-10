@@ -26,6 +26,8 @@ const PollVote = lazy(() => import("./modules/poll/PollVote"));
 const PollResults = lazy(() => import("./modules/poll/PollResult"));
 const UserAgreement = lazy(() => import("./modules/UserAgreement"));
 const Cookies = lazy(() => import("./modules/Cookies"));
+const RealInterestRate = lazy(() => import("./modules/RealInterestRate"));
+const TicTacToe = lazy(() => import("./modules/TicTacToe"));
 
 const router = createBrowserRouter([
   {
@@ -66,6 +68,8 @@ const router = createBrowserRouter([
       { path: "poll/:slug/results", element: <PollResults /> },
       { path: "useragreement", element: <UserAgreement /> },
       { path: "cookies", element: <Cookies /> },
+      { path: "real_interest_rate", element: <RealInterestRate /> },
+      { path: "tictactoe", element: <TicTacToe /> },
 
       { path: "*", element: <NotFound /> },
     ],

@@ -16,17 +16,20 @@ const RandomNumberGenerator = () => {
     const numMin = Math.min(min, max);
     const numMax = Math.max(min, max);
 
-    const newNumbers = [];
+    const newNumbers = new Set();
+    const range = numMax - numMin + 1;
 
-    if (!isNaN(numMin) || !isNaN(numMax)) {
-      for (let i = 0; i < numCount; i++) {
-        const randomNum =
-          Math.floor(Math.random() * (numMax - numMin + 1)) + numMin;
-        newNumbers.push(randomNum);
+    // Проверка: чтобы не уйти в бесконечный цикл, если чисел в диапазоне меньше, чем нужно
+    const targetCount = Math.min(numCount, range);
+
+    if (!isNaN(numMin) && !isNaN(numMax)) {
+      while (newNumbers.size < targetCount) {
+        const randomNum = Math.floor(Math.random() * range) + numMin;
+        newNumbers.add(randomNum);
       }
     }
-
-    setNumbers(newNumbers);
+    const sortedNumbers = Array.from(newNumbers).sort((a, b) => a - b);
+    setNumbers(sortedNumbers);
   };
 
   // Генерация чисел при изменении параметров
@@ -86,7 +89,7 @@ const RandomNumberGenerator = () => {
                     max="30"
                     value={count}
                     onChange={handleCountChange}
-                    className="w-full p-3 pl-10 bg-blue-50 border-2 border-blue-200 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                    className="w-full p-2 pl-10 bg-blue-50 border-2 border-blue-200 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
                   />
                   <div className="absolute left-3 top-3 text-teal-600">
                     <svg
@@ -119,7 +122,7 @@ const RandomNumberGenerator = () => {
                     type="number"
                     value={min}
                     onChange={handleMinChange}
-                    className="w-full p-3 pl-10 bg-blue-50 border-2 border-blue-200 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                    className="w-full p-2 pl-10 bg-blue-50 border-2 border-blue-200 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
                   />
                   <div className="absolute left-3 top-3 text-teal-600">
                     <svg
@@ -149,7 +152,7 @@ const RandomNumberGenerator = () => {
                     type="number"
                     value={max}
                     onChange={handleMaxChange}
-                    className="w-full p-3 pl-10 bg-blue-50 border-2 border-blue-200 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                    className="w-full p-2 pl-10 bg-blue-50 border-2 border-blue-200 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
                   />
                   <div className="absolute left-3 top-3 text-teal-600">
                     <svg
@@ -168,6 +171,27 @@ const RandomNumberGenerator = () => {
                   </div>
                 </div>
               </div>
+
+              <button
+                onClick={generateRandomNumbers}
+                className="mb-8 bg-linear-to-r cursor-pointer from-blue-500 to-teal-500 text-white w-full px-4 py-2 rounded-lg hover:from-blue-600 hover:to-teal-600 transition-all flex items-center shadow-md hover:shadow-lg"
+              >
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://w3.org"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                  ></path>
+                </svg>
+                Сгенерировать
+              </button>
 
               {/* Информационный блок */}
               <div className="bg-linear-to-r from-cyan-100 to-teal-100 p-4 rounded-lg border border-blue-200">

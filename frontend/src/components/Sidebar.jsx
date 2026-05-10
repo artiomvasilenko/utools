@@ -101,6 +101,22 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
               📊 Создание опроса
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="real_interest_rate"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              🏷️ Реальная процентная ставка по кредиту
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/tictactoe"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              ❌ Крестики-нолики
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>
