@@ -25,6 +25,7 @@ const PollCreator = lazy(() => import("./modules/poll/PollCreator"));
 const PollVote = lazy(() => import("./modules/poll/PollVote"));
 const PollResults = lazy(() => import("./modules/poll/PollResult"));
 const UserAgreement = lazy(() => import("./modules/UserAgreement"));
+const Cookies = lazy(() => import("./modules/Cookies"));
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
       { path: "poll/:slug", element: <PollVote /> },
       { path: "poll/:slug/results", element: <PollResults /> },
       { path: "useragreement", element: <UserAgreement /> },
+      { path: "cookies", element: <Cookies /> },
 
       { path: "*", element: <NotFound /> },
     ],

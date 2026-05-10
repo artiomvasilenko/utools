@@ -1,39 +1,6 @@
 function UserAgreement() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-      {/* Верхняя панель с названием и бейджем */}
-      <div className="border-b border-slate-200 pb-4 mb-6 flex flex-wrap items-baseline justify-between gap-3">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">
-            use‑tools.ru
-          </h1>
-          <p className="text-slate-500 text-sm mt-1">полезные инструменты</p>
-        </div>
-        <div className="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full text-sm font-medium">
-          калькуляторы · календарь · генераторы
-        </div>
-      </div>
-
-      {/* Мини-навигация по инструментам (демо-ссылки) */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {[
-          "Калькулятор",
-          "Календарь",
-          "Генератор паролей",
-          "Таймер",
-          "Опросники",
-          "Конвертер",
-        ].map((tool) => (
-          <a
-            key={tool}
-            href="#"
-            className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-full text-sm font-medium transition"
-          >
-            {tool}
-          </a>
-        ))}
-      </div>
-
       {/* Основной контент — карточка с соглашением */}
       <div className="bg-white rounded-2xl shadow-md border border-slate-100 p-5 sm:p-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">
@@ -198,10 +165,10 @@ function UserAgreement() {
           7.3. Для связи по вопросам работы Сайта, предложений или жалоб,
           касающихся рекламы или инструментов, вы можете написать по адресу:{" "}
           <a
-            href="mailto:support@use-tools.ru"
+            href="mailto:artiomvasilenko@yandex.ru"
             className="text-blue-600 hover:text-blue-700 font-medium"
           >
-            support@use-tools.ru
+            artiomvasilenko@yandex.ru
           </a>{" "}
           (адрес указан для обратной связи, поддержка отвечает в рабочие дни).
         </p>
@@ -245,17 +212,6 @@ function UserAgreement() {
           </a>
           .
         </p>
-      </div>
-
-      {/* Футер */}
-      <div className="text-center text-slate-500 text-xs sm:text-sm mt-8 pt-5 border-t border-slate-200">
-        © 2026 use-tools.ru — простые веб-инструменты для каждого.
-        <br className="sm:hidden" />
-        Используя сайт, вы принимаете условия{" "}
-        <a href="#" className="text-blue-600 hover:text-blue-700">
-          Пользовательского соглашения
-        </a>{" "}
-        и соглашаетесь на сбор аналитики Яндекс.Вебмастер.
       </div>
     </div>
   );
