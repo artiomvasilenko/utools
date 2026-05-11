@@ -149,6 +149,14 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
               ❌ Крестики-нолики
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/speed_thinking"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              ⏱️ Тест скорости мышления
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>

@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
+
 function NotFound() {
   return (
-    <div>
-      <h1 className="text-6xl">Такой страницы не существует!</h1>
-      <hr />
-      <a href="/">На главную</a>
+    <div className="text-center pt-24">
+      <h1 className="text-2xl">Такой страницы не существует 🙁</h1>
+      <Link className="text-4xl text-blue-700 " to="/">
+        На главную
+      </Link>
     </div>
   );
 }

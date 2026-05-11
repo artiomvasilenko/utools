@@ -32,6 +32,7 @@ const PdfMerger = lazy(() => import("./modules/PdfMerger"));
 const CoinFlip = lazy(() => import("./modules/CoinFlip"));
 const NicknameGenerator = lazy(() => import("./modules/NicknameGenerator"));
 const HeicToJpg = lazy(() => import("./modules/HeicToJpg"));
+const SpeedThinking = lazy(() => import("./modules/SpeedThinking"));
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,7 @@ const router = createBrowserRouter([
       { path: "coinflip", element: <CoinFlip /> },
       { path: "nickname_generator", element: <NicknameGenerator /> },
       { path: "heictojpg", element: <HeicToJpg /> },
+      { path: "speed_thinking", element: <SpeedThinking /> },
 
       { path: "*", element: <NotFound /> },
     ],
