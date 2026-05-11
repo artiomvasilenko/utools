@@ -3,8 +3,7 @@ export default function Footer() {
     <footer>
       <script async src="https://ad.mail.ru/static/ads-async.js"></script>
       <ins
-        class="mrg-tag"
-        className="display:inline-block;width:auto;height:300px"
+        className="display:inline-block;width:auto;height:300px;mrg-tag"
         data-ad-client="ad-2008502"
         data-ad-slot="2008502"
       ></ins>

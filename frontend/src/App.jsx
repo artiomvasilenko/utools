@@ -33,6 +33,8 @@ const CoinFlip = lazy(() => import("./modules/CoinFlip"));
 const NicknameGenerator = lazy(() => import("./modules/NicknameGenerator"));
 const HeicToJpg = lazy(() => import("./modules/HeicToJpg"));
 const SpeedThinking = lazy(() => import("./modules/SpeedThinking"));
+const BackgroundRemover = lazy(() => import("./modules/BackgroundRemover"));
+const Notepad = lazy(() => import("./modules/Notepad"));
 
 const router = createBrowserRouter([
   {
@@ -80,7 +82,8 @@ const router = createBrowserRouter([
       { path: "nickname_generator", element: <NicknameGenerator /> },
       { path: "heictojpg", element: <HeicToJpg /> },
       { path: "speed_thinking", element: <SpeedThinking /> },
-
+      { path: "background_remover", element: <BackgroundRemover /> },
+      { path: "notepad", element: <Notepad /> },
       { path: "*", element: <NotFound /> },
     ],
   },

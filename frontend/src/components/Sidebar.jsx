@@ -157,6 +157,22 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
               ⏱️ Тест скорости мышления
             </NavLink>
           </li>
+          {/* <li>
+            <NavLink
+              to="/background_remover"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              🌄 Удаление фона
+            </NavLink>
+          </li> */}
+          <li>
+            <NavLink
+              to="/notepad"
+              className="block p-2 hover:bg-gray-700 hover:scale-105 transition-all"
+            >
+              🗒️ Блокнот
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>
